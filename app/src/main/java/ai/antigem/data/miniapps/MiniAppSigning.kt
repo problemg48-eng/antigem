@@ -323,7 +323,7 @@ object MiniAppKeyBackup {
             val real = r.query(uri, arrayOf(android.provider.MediaStore.MediaColumns.DISPLAY_NAME), null, null, null)?.use { c -> if (c.moveToFirst()) c.getString(0) else null } ?: name
             "Download/AntiGem/$real"
         } else {
-            val dir = File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS), "AntiGem").also { it.mkdirs() }
+            val dir = File(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS), "CosmicCodex").also { it.mkdirs() }
             var f = File(dir, name); var n = 1
             while (f.exists()) f = File(dir, name.removeSuffix(".agkey") + " (${n++}).agkey")
             f.writeBytes(bytes)

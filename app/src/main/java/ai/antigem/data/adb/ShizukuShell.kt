@@ -122,7 +122,7 @@ object ShizukuShell {
         refresh()
         val s = _status.value
         return when {
-            !s.installed -> "Shizuku is not installed. Install it (${DOWNLOAD_URL}), start it, then grant AntiGem in AntiGem → Settings → ADB Connect → Shizuku."
+            !s.installed -> "Shizuku is not installed. Install it (${DOWNLOAD_URL}), start it, then grant Cosmic Codex in Cosmic Codex → Settings → ADB Connect → Shizuku."
             !s.running -> "Shizuku is not running. Open the Shizuku app and start it (after every reboot unless the phone is rooted)."
             s.tooOld -> "This Shizuku is too old (before v11). Update Shizuku."
             !s.granted -> "AntiGem has no Shizuku permission yet. Open AntiGem → Settings → ADB Connect → Shizuku and tap Grant."
@@ -167,7 +167,7 @@ object ShizukuShell {
                 }
             }
         }
-        binder ?: throw IllegalStateException("Shizuku didn't start AntiGem's helper within 20 seconds. Restart Shizuku and try again.")
+        binder ?: throw IllegalStateException("Shizuku did not start Cosmic Codex's helper within 20 seconds. Restart Shizuku and try again.")
     }
 
     /** Stops the helper process (it is started again by the next command). */

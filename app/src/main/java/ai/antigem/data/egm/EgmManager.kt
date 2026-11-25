@@ -438,7 +438,7 @@ object EgmManager {
     }
 
     private suspend fun download(url: String, target: File) = withContext(Dispatchers.IO) {
-        val request = Request.Builder().url(url).header("User-Agent", "AntiGem/${BuildConfig.VERSION_NAME}").build()
+        val request = Request.Builder().url(url).header("User-Agent", "CosmicCodex/${BuildConfig.VERSION_NAME}").build()
         http.newCall(request).execute().use { response ->
             if (!response.isSuccessful) throw IllegalStateException("Download failed (HTTP ${response.code}): $url")
             val body = response.body ?: throw IllegalStateException("Empty response: $url")
@@ -460,7 +460,7 @@ object EgmManager {
     }
 
     private suspend fun httpGet(url: String, accept: String? = null): String = withContext(Dispatchers.IO) {
-        val builder = Request.Builder().url(url).header("User-Agent", "AntiGem/${BuildConfig.VERSION_NAME}")
+        val builder = Request.Builder().url(url).header("User-Agent", "CosmicCodex/${BuildConfig.VERSION_NAME}")
         if (accept != null) builder.header("Accept", accept)
         val request = builder.build()
         http.newCall(request).execute().use { response ->
@@ -563,7 +563,7 @@ object EgmManager {
     /** The facts every EGM run needs, from the settings: where EGM is, which reviewers, the limits. */
     private fun setupBlock(s: Settings): String = buildString {
         val version = _state.value.label?.let { " $it" }.orEmpty()
-        appendLine("EGM (Elephant-Goldfish Model$version, $HOMEPAGE) is installed by AntiGem. It makes you plan and defend a design before any code: the Elephant (the main agent, with the whole context) writes a design document, and fresh Goldfish reviewers that know nothing of the conversation try to break it.")
+        appendLine("EGM (Elephant-Goldfish Model$version, $HOMEPAGE) is installed by Cosmic Codex. It makes you plan and defend a design before any code: the Elephant (the main agent, with the whole context) writes a design document, and fresh Goldfish reviewers that know nothing of the conversation try to break it.")
         appendLine("- EGM root: $root (skills/<name>/SKILL.md = the workflows, agents/<file>.md = the Goldfish reviewer personas, resources/document_standards/ = the review standards, docs/ = notes per agent).")
         appendLine("- EGM is not installed as a plugin of your agent here: its skills are not in your skill list and its personas are not registered subagent types. Read the files and follow them; never call a Skill tool for them. Where an EGM file says \${CLAUDE_PLUGIN_ROOT}, \"the plugin root\" or a path like agents/…, resources/… or docs/…, use the EGM root. A skill's references/ folder is next to its SKILL.md.")
         appendLine("- If the EGM root does not exist where you run (an agent on a PC or a server), stop and tell the user that EGM is installed on the phone only.")
@@ -661,9 +661,9 @@ object EgmManager {
     }
 
     private fun plannerRules(s: Settings): String = """
-# EGM in AntiGem: the Elephant (planner) of a run that Jarvis manages
+# EGM in Cosmic Codex: the Elephant (planner) of a run that Jarvis manages
 
-Written by AntiGem from Settings → Agents → EGM and rewritten when those settings change.
+Written by Cosmic Codex from Settings → Agents → EGM and rewritten when those settings change.
 
 ${setupBlock(s)}
 
@@ -685,7 +685,7 @@ You keep the project context, work with the user (through Jarvis) and write the 
 - When the design is final, reply PHASE: Waiting for approval with the design document's path and what is still open, and stop. Change no project code until Jarvis sends APPROVED.
 """.trimStart()
 
-    private const val GOLDFISH_RULES = """# EGM Goldfish reviewer (AntiGem)
+    private const val GOLDFISH_RULES = """# EGM Goldfish reviewer (Cosmic Codex)
 
 You are a Goldfish: a fresh reviewer in the Elephant-Goldfish Model (EGM). You know nothing about the conversation that produced the document, and that is the point.
 

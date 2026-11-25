@@ -165,7 +165,7 @@ fun TermuxRuntimeCard(cardBg: Color, cardBorder: BorderStroke, onInstall: () -> 
     LaunchedEffect(installerState) {
         if (installerState is ai.antigem.data.local.LocalInstallerState.Success) onInstalled()
     }
-    ChrootSection("AntiGem", if (installed) L.settings.chrootSettingsScreens.antigemsBuiltInLinuxEnvironmentIn
+    ChrootSection("Cosmic Codex", if (installed) L.settings.chrootSettingsScreens.antigemsBuiltInLinuxEnvironmentIn
         else L.settings.chrootSettingsScreens.notInstalledAntigemsBuiltInLinux,
         Icons.Outlined.Terminal, AppColors.accentIndigo, cardBg, cardBorder) {
         if (!installed) {

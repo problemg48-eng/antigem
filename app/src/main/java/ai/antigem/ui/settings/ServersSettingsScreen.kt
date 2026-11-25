@@ -675,7 +675,7 @@ internal fun ServersSubScreen(
                 Text(L.common.thisPhone, fontSize = 11.5.sp, fontWeight = FontWeight.SemiBold, color = subtle)
                 Spacer(Modifier.height(4.dp))
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                    ModeOption("AntiGem", !remote && !phoneChroot, Modifier.weight(1f)) { selectPhone(false) }
+                    ModeOption("Cosmic Codex", !remote && !phoneChroot, Modifier.weight(1f)) { selectPhone(false) }
                     ModeOption(L.common.ubuntuChroot, !remote && phoneChroot, Modifier.weight(1f)) { selectPhone(true) }
                 }
                 Spacer(Modifier.height(8.dp))

@@ -259,7 +259,7 @@ open class AntiGemService : Service(), LifecycleOwner, ViewModelStoreOwner, Save
         val priority = if (wakeLockHeld) NotificationCompat.PRIORITY_HIGH else NotificationCompat.PRIORITY_LOW
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("AntiGem")
+            .setContentTitle("Cosmic Codex")
             .setContentText(notificationText)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentIntent(pendingIntent)

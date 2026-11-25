@@ -10,10 +10,10 @@
         android:height="288dp"
         android:drawable="@drawable/ic_launcher_foreground" />
 
-    <!-- "ANTIGEM" wordmark at the bottom, like the Android 12+ splash branding image -->
+    <!-- "COSMIC CODEX" wordmark at the bottom, like the Android 12+ splash branding image -->
     <item
         android:gravity="bottom|center_horizontal"
-        android:width="200dp"
+        android:width="320dp"
         android:height="80dp"
         android:bottom="60dp"
         android:drawable="@drawable/splash_wordmark" />

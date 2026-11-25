@@ -150,7 +150,7 @@ class CrashActivity : ComponentActivity() {
     private fun copy(text: String) {
         runCatching {
             (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
-                .setPrimaryClip(ClipData.newPlainText("AntiGem crash report", text))
+                .setPrimaryClip(ClipData.newPlainText("Cosmic Codex crash report", text))
         }
     }
 
@@ -159,7 +159,7 @@ class CrashActivity : ComponentActivity() {
             startActivity(
                 Intent.createChooser(
                     Intent(Intent.ACTION_SEND).setType("text/plain")
-                        .putExtra(Intent.EXTRA_SUBJECT, "AntiGem crash report")
+                        .putExtra(Intent.EXTRA_SUBJECT, "Cosmic Codex crash report")
                         .putExtra(Intent.EXTRA_TEXT, text),
                     L.crash.activity.shareCrashReport
                 )

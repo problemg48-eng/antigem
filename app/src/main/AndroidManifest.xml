@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- sharedUserId: AntiGem's own Termux:API and Termux:X11 apps (same signing key) share its files. Adding or removing it
+<!-- sharedUserId: Cosmic Codex's own Termux:API and Termux:X11 apps (same signing key) share its files. Adding or removing it
      later would force users to reinstall, so it stays. It is the app's package name: ai.antigem (release), ai.antidev
      (debug), so the two never claim the same shared user with different signing keys. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -451,7 +451,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <!-- AntiGem's home (and the Ubuntu chroot's) in Android's file picker and Files app. Only the system picker
+        <!-- Cosmic Codex's home (and the Ubuntu chroot's) in Android's file picker and Files app. Only the system picker
              (MANAGE_DOCUMENTS) can browse it; Settings → Files in other apps disables this component. -->
         <provider
             android:name="ai.antigem.data.files.AntiGemDocumentsProvider"
@@ -471,14 +471,14 @@
             android:exported="true"
             android:theme="@style/Theme.AntiGem.MiniApp"
             android:configChanges="uiMode|orientation|screenSize|screenLayout|smallestScreenSize" />
-        <!-- "Get apps": the mini apps of AntiGem's GitHub catalog -->
+        <!-- "Get apps": the mini apps of Cosmic Codex's GitHub catalog -->
         <activity
             android:name="ai.antigem.ui.miniapps.MiniAppStoreActivity"
             android:exported="false"
             android:theme="@style/Theme.AntiGem.MiniApp"
             android:configChanges="uiMode|orientation|screenSize|screenLayout|smallestScreenSize" />
         <!-- The mini app installer (like Android's for .apk): opening an .agapp from any app (WhatsApp, Telegram, Gmail,
-             Files, a browser's downloads, AntiGem's file explorer) shows the install / update screen over that app -->
+             Files, a browser's downloads, Cosmic Codex's file explorer) shows the install / update screen over that app -->
         <activity
             android:name="ai.antigem.ui.miniapps.MiniAppInstallActivity"
             android:exported="true"

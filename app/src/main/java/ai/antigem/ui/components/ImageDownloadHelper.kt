@@ -129,7 +129,7 @@ object ImageDownloadHelper {
                     resolver.update(uri, values, null, null)
                 }
             } else {
-                val dir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "AntiGem").apply { mkdirs() }
+                val dir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "CosmicCodex").apply { mkdirs() }
                 val target = File(dir, fileName)
                 target.outputStream().use { out -> stream.copyTo(out) }
                 Uri.fromFile(target)
@@ -192,7 +192,7 @@ object ImageDownloadHelper {
 
                 Pair(itemUri, mimeType)
             } else {
-                val downloadsDir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "AntiGem")
+                val downloadsDir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "CosmicCodex")
                 if (!downloadsDir.exists()) downloadsDir.mkdirs()
                 val targetFile = File(downloadsDir, fileName)
                 targetFile.writeBytes(bytes)

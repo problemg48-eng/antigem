@@ -137,13 +137,13 @@ fun TerminalLauncherOnboardingDialog(
                                     contentAlignment = Alignment.Center
                                 ) {
                                     ai.antigem.ui.components.AppIconImage(
-                                        contentDescription = "AntiGem",
+                                        contentDescription = "Cosmic Codex",
                                         modifier = Modifier.matchParentSize()
                                     )
                                 }
                                 Spacer(modifier = Modifier.height(6.dp))
                                 Text(
-                                    text = "AntiGem",
+                                    text = "Cosmic Codex",
                                     fontSize = 11.5.sp,
                                     fontWeight = FontWeight.Medium,
                                     color = MaterialTheme.colorScheme.onSurface

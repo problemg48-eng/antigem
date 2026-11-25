@@ -10,7 +10,7 @@ import org.json.JSONObject
  */
 object LanguageMcp {
 
-    const val INSTRUCTIONS = "Translates AntiGem's interface. Every text the app shows has a key (like settings.dialog.themes) with " +
+    const val INSTRUCTIONS = "Translates Cosmic Codex's interface. Every text the app shows has a key (like settings.dialog.themes) with " +
         "English as the source; a language gives its own text per key, and English shows for any key it leaves out. " +
         "The app ships only English: other languages are downloaded from the community repository (language_catalog lists " +
         "them, language_download installs or updates one) or made by the user. " +

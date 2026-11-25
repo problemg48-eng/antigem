@@ -18,10 +18,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.Image
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -97,26 +100,41 @@ fun WorkspaceHomeScreen(
                 .padding(horizontal = 16.dp, vertical = 14.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Top Welcome Header
+            // Top Welcome Header — COSMIC CODEX branding
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = BrandConfig.productName,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = AppColors.onBackground
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Image(
+                        painter = painterResource(ai.antigem.R.drawable.ic_cosmic_codex_logo),
+                        contentDescription = "Cosmic Codex",
+                        modifier = Modifier
+                            .height(40.dp)
+                            .width(40.dp)
+                            .clip(androidx.compose.foundation.shape.RoundedCornerShape(8.dp)),
+                        contentScale = ContentScale.Fit
                     )
-                    Text(
-                        text = BrandConfig.tagline,
-                        fontSize = 12.5.sp,
-                        color = AppColors.textSecondary,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    Column {
+                        Text(
+                            text = BrandConfig.productName,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = AppColors.onBackground
+                        )
+                        Text(
+                            text = BrandConfig.tagline,
+                            fontSize = 12.5.sp,
+                            color = AppColors.textSecondary,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
                 IconButton(onClick = onOpenSettings) {
                     Icon(Icons.Outlined.Settings, contentDescription = "Settings", tint = AppColors.onBackground)

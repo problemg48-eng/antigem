@@ -52,7 +52,7 @@ object RootShell {
             else State(Check.DENIED, out.ifBlank { "su exited with code ${p.exitValue()}" }.take(300))
         } catch (e: Exception) {
             // "Cannot run program su": not rooted (or su hidden from this app)
-            State(Check.NO_SU, "su was not found: this phone is not rooted, or the root manager hides su from AntiGem.")
+            State(Check.NO_SU, "su was not found: this phone is not rooted, or the root manager hides su from Cosmic Codex.")
         }
         if (::appContext.isInitialized) prefs.edit().putBoolean("root_granted", result.check == Check.GRANTED).apply()
         _state.value = result
@@ -61,9 +61,9 @@ object RootShell {
 
     fun notReadyMessage(): String? = when (_state.value.check) {
         Check.GRANTED -> null
-        Check.NO_SU -> "This phone has no su (not rooted, or the root manager hides su from AntiGem)."
-        Check.DENIED -> "Root was denied to AntiGem. Allow AntiGem in the root manager (Magisk / KernelSU / APatch), then tap Check root in AntiGem → Settings → ADB Connect → Root."
-        else -> "Root hasn't been checked yet. Open AntiGem → Settings → ADB Connect → Root and tap Check root."
+        Check.NO_SU -> "This phone has no su (not rooted, or the root manager hides su from Cosmic Codex)."
+        Check.DENIED -> "Root was denied to Cosmic Codex. Allow Cosmic Codex in the root manager (Magisk / KernelSU / APatch), then tap Check root in Cosmic Codex → Settings → ADB Connect → Root."
+        else -> "Root has not been checked yet. Open Cosmic Codex → Settings → ADB Connect → Root and tap Check root."
     }
 
     /** Starts `su -c [script]` (stdout and stderr together). */
@@ -72,7 +72,7 @@ object RootShell {
         val process = try {
             ProcessBuilder("su", "-c", "echo \$\$\n$script").redirectErrorStream(true).start()
         } catch (e: Exception) {
-            throw IllegalStateException("su was not found: this phone is not rooted, or the root manager hides su from AntiGem.")
+            throw IllegalStateException("su was not found: this phone is not rooted, or the root manager hides su from Cosmic Codex.")
         }
         val raw = process.inputStream
         var pid = -1

@@ -106,7 +106,7 @@ private fun ChatsContent(preview: Boolean) {
         working > 0 && finished > 0 -> L.homescreen.chatsWidget.workingWorkingFinishedDone(working, finished)
         working > 0 -> "$working working"
         finished > 0 -> "$finished done"
-        else -> "AntiGem"
+        else -> "Cosmic Codex"
     }
 
     Column(widgetRoot(GlanceModifier.fillMaxSize()).padding(horizontal = 10.dp, vertical = 10.dp)) {
@@ -115,7 +115,7 @@ private fun ChatsContent(preview: Boolean) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                ImageProvider(R.mipmap.ic_launcher_round), "AntiGem",
+                ImageProvider(R.mipmap.ic_launcher_round), "Cosmic Codex",
                 modifier = GlanceModifier.size(26.dp).clickable(open(ctx, HomeLinks.Target.OpenPage(HomeLinks.Page.CHAT)))
             )
             Spacer(GlanceModifier.width(8.dp))

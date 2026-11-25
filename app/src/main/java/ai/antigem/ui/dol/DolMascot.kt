@@ -22,10 +22,10 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 /**
- * Original ANTIGEM mascot: DOL.
+ * COSMIC CODEX mascot: DOL.
  *
  * Vector/Canvas-rendered robot with consistent proportions, white/lavender shell,
- * dark visor, glowing electric-blue eyes, and purple ANTIGEM 'A' chest emblem.
+ * dark visor, glowing electric-blue eyes, and COSMIC CODEX 'C' chest emblem with orbit arc.
  */
 @Composable
 fun DolMascot(
@@ -155,19 +155,42 @@ fun DolMascot(
             cornerRadius = CornerRadius(w * 0.12f, w * 0.12f)
         )
 
-        // Chest 'A' ANTIGEM emblem
-        val emblemPath = Path().apply {
-            moveTo(w * 0.5f, bodyTop + bodyH * 0.22f)
-            lineTo(w * 0.42f, bodyTop + bodyH * 0.76f)
-            moveTo(w * 0.5f, bodyTop + bodyH * 0.22f)
-            lineTo(w * 0.58f, bodyTop + bodyH * 0.76f)
-            moveTo(w * 0.45f, bodyTop + bodyH * 0.56f)
-            lineTo(w * 0.55f, bodyTop + bodyH * 0.56f)
+        // Chest 'C' COSMIC CODEX emblem — arc with orbit ring
+        // Main "C" arc (270° sweep leaving a gap on the right)
+        drawArc(
+            color = Color(0xFF4A90E2),
+            startAngle = 50f,
+            sweepAngle = 260f,
+            useCenter = false,
+            topLeft = Offset(w * 0.40f, bodyTop + bodyH * 0.14f),
+            size = Size(bodyW * 0.52f, bodyH * 0.58f),
+            style = Stroke(width = w * 0.030f, cap = StrokeCap.Round)
+        )
+        // Orbit ring — thin diagonal ellipse across the C emblem
+        drawOval(
+            color = purpleAccent.copy(alpha = 0.72f),
+            topLeft = Offset(w * 0.37f, bodyTop + bodyH * 0.26f),
+            size = Size(bodyW * 0.60f, bodyH * 0.22f),
+            style = Stroke(width = w * 0.016f)
+        )
+        // Central 4-point star glyph (two lines crossing)
+        val starCx = w * 0.50f
+        val starCy = bodyTop + bodyH * 0.44f
+        val starR = w * 0.038f
+        val starPath = Path().apply {
+            moveTo(starCx, starCy - starR)
+            lineTo(starCx, starCy + starR)
+            moveTo(starCx - starR, starCy)
+            lineTo(starCx + starR, starCy)
+            moveTo(starCx - starR * 0.6f, starCy - starR * 0.6f)
+            lineTo(starCx + starR * 0.6f, starCy + starR * 0.6f)
+            moveTo(starCx + starR * 0.6f, starCy - starR * 0.6f)
+            lineTo(starCx - starR * 0.6f, starCy + starR * 0.6f)
         }
         drawPath(
-            path = emblemPath,
-            color = purpleAccent,
-            style = Stroke(width = w * 0.028f, cap = StrokeCap.Round)
+            path = starPath,
+            color = Color(0xFFE0D0FF),
+            style = Stroke(width = w * 0.018f, cap = StrokeCap.Round)
         )
 
         // Head group with tilt & bob

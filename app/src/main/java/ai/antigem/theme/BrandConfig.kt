@@ -18,8 +18,8 @@ object BrandConfig {
     private const val KEY_PRODUCT_NAME = "product_name"
     private const val KEY_TAGLINE = "tagline"
 
-    const val DEFAULT_PRODUCT_NAME = "AntiGem"
-    const val DEFAULT_TAGLINE = "Autonomous Multi-Agent AI Development Platform"
+    const val DEFAULT_PRODUCT_NAME = "Cosmic Codex"
+    const val DEFAULT_TAGLINE = "Your AI-Powered Cosmic Development Platform"
     const val LICENSE_NAME = "GPL-3.0"
 
     var productName by mutableStateOf(DEFAULT_PRODUCT_NAME)

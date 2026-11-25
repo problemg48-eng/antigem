@@ -1012,7 +1012,7 @@ private fun MainSettingsMenu(
                     when {
                         ai.antigem.data.preferences.AuthPreferences.currentRemoteMode -> L.common.server
                         ai.antigem.data.local.chroot.ChrootManager.isActiveNow() -> L.common.ubuntuChroot
-                        else -> "AntiGem"
+                        else -> "Cosmic Codex"
                     } + if (serverColor == QuotaGreen) "" else " · $serverValue", serverColor),
                 pcRow
             ),
@@ -8821,14 +8821,14 @@ private fun AboutSubScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 ai.antigem.ui.components.AppIconImage(
-                    contentDescription = "AntiGem",
+                    contentDescription = "Cosmic Codex",
                     modifier = Modifier
                         .size(64.dp)
                         .clip(RoundedCornerShape(16.dp))
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
-                    text = "AntiGem",
+                    text = "Cosmic Codex",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface

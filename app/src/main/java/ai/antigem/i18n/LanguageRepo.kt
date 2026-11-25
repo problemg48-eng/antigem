@@ -159,7 +159,7 @@ object LanguageRepo {
     private fun parse(text: String): List<Pack> {
         val o = runCatching { JSONObject(text) }.getOrElse { throw RepoException(Kind.BAD_DATA, "The language list isn't valid JSON") }
         if (o.optString("format") != "antigem-language-index") throw RepoException(Kind.BAD_DATA, "Not a language list")
-        if (o.optInt("format_version", 1) > 1) throw RepoException(Kind.NEWER_APP, "The language list needs a newer AntiGem")
+        if (o.optInt("format_version", 1) > 1) throw RepoException(Kind.NEWER_APP, "The language list needs a newer Cosmic Codex")
         val arr = o.optJSONArray("languages") ?: return emptyList()
         return (0 until arr.length()).mapNotNull { arr.optJSONObject(it) }.mapNotNull { p -> runCatching { pack(p) }.getOrNull() }
             .distinctBy { it.id }

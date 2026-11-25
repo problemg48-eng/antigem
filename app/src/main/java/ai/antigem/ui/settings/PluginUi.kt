@@ -117,7 +117,7 @@ private suspend fun saveToDownloads(context: Context, fileName: String, mime: St
                 val uri = resolver.insert(MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY), values) ?: error("Cannot create file")
                 resolver.openOutputStream(uri)?.use(write) ?: error("Cannot write file")
             } else {
-                val dir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "AntiGem").apply { mkdirs() }
+                val dir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "CosmicCodex").apply { mkdirs() }
                 File(dir, fileName).outputStream().use(write)
             }
         }

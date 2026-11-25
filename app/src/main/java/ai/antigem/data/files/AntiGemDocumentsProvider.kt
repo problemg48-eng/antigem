@@ -58,9 +58,9 @@ import ai.antigem.i18n.L
 /**
  * Shows AntiGem's folders in Android's file picker and Files app (the Storage Access Framework), like Termux does:
  *
- * - "AntiGem": the built-in environment's home (files/home), read and written directly. Its `storage` folder (links
+ * - "Cosmic Codex": the built-in environment's home (files/home), read and written directly. Its `storage` folder (links
  *   to the shared storage, which the picker lists already) is left out.
- * - "AntiGem Ubuntu": the rooted Ubuntu chroot's home (/home/<user>). The app cannot read the rootfs (root-owned
+ * - "Cosmic Codex Ubuntu": the rooted Ubuntu chroot's home (/home/<user>). The app cannot read the rootfs (root-owned
  *   folders under /data/local, SELinux), so everything goes through the chroot's IDE bridge on this phone, which runs
  *   inside Ubuntu as its user: Linux paths, links and owners stay right. It works while that bridge runs; otherwise
  *   the picker shows a message instead of the files.
@@ -254,7 +254,7 @@ class AntiGemDocumentsProvider : DocumentsProvider() {
 
     override fun onCreate(): Boolean = true
 
-    private fun ctx(): Context = context ?: throw FileNotFoundException("AntiGem is starting")
+    private fun ctx(): Context = context ?: throw FileNotFoundException("Cosmic Codex is starting")
 
     /**
      * Runs a provider call and turns any failure into an exception a client understands (and that never takes the
@@ -291,7 +291,7 @@ class AntiGemDocumentsProvider : DocumentsProvider() {
                 c.newRow()
                     .add(Root.COLUMN_ROOT_ID, ROOT_HOME)
                     .add(Root.COLUMN_DOCUMENT_ID, "$ROOT_HOME:")
-                    .add(Root.COLUMN_TITLE, "AntiGem")
+                    .add(Root.COLUMN_TITLE, "Cosmic Codex")
                     .add(Root.COLUMN_SUMMARY, L.files.antiGemDocumentsProvider.homeFolder)
                     .add(Root.COLUMN_FLAGS, flags)
                     .add(Root.COLUMN_ICON, icon)

@@ -142,7 +142,7 @@ object ArtifactDownloadHelper {
 
                 Triple(itemUri, mimeType, fileName)
             } else {
-                val downloadsDir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "AntiGem")
+                val downloadsDir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "CosmicCodex")
                 if (!downloadsDir.exists()) downloadsDir.mkdirs()
                 val targetFile = File(downloadsDir, fileName)
                 targetFile.writeBytes(bytes)
