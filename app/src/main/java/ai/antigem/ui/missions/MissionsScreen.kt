@@ -74,6 +74,8 @@ fun MissionsScreen() {
                 color = AppColors.textSecondary
             )
 
+            ai.antigem.ui.dol.DolAssistantCard()
+
             // Mission Composer Card
             Surface(
                 modifier = Modifier.fillMaxWidth(),

@@ -48,12 +48,15 @@ fun PermissionsScreen(cardBg: Color, cardBorder: Color) {
 
     LaunchedEffect(Unit) {
         PermissionManager.refresh(context)
+        ai.antigem.data.dol.DolOverlayManager.init(context)
+        ai.antigem.data.dol.DolVoiceManager.init(context)
     }
 
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
                 PermissionManager.refresh(context)
+                ai.antigem.data.dol.DolOverlayManager.refresh(context)
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -63,6 +66,9 @@ fun PermissionsScreen(cardBg: Color, cardBorder: Color) {
     val permState by PermissionManager.state.collectAsState()
     val storageState by StorageGateway.accessState.collectAsState()
     val isServiceRunning by AntiGemService.isRunning.collectAsState()
+    val hasOverlayPerm by ai.antigem.data.dol.DolOverlayManager.hasOverlayPermission.collectAsState()
+    val floatingDolEnabled by ai.antigem.data.dol.DolOverlayManager.floatingEnabled.collectAsState()
+    val voiceEnabled by ai.antigem.data.dol.DolVoiceManager.voiceEnabled.collectAsState()
     val scrollState = rememberScrollState()
 
     val notifLauncher = rememberLauncherForActivityResult(
@@ -234,6 +240,76 @@ fun PermissionsScreen(cardBg: Color, cardBorder: Color) {
                         }
                     }
                 )
+                HorizontalDivider(modifier = Modifier.padding(start = 60.dp), color = cardBorder)
+
+                PermissionStatusRow(
+                    icon = Icons.Outlined.Layers,
+                    tint = Color(0xFF7C3AED),
+                    title = "Display Over Other Apps",
+                    subtitle = ai.antigem.data.dol.DolOverlayManager.PERMISSION_EXPLANATION,
+                    statusLabel = if (hasOverlayPerm) "Granted" else "Not Granted",
+                    statusColor = if (hasOverlayPerm) AppColors.success else AppColors.warning,
+                    actionLabel = if (hasOverlayPerm) "Settings" else "Grant",
+                    onAction = {
+                        ai.antigem.data.dol.DolOverlayManager.openOverlayPermissionSettings(context)
+                    }
+                )
+            }
+        }
+
+        // DOL Voice & Floating DOL Controls
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(18.dp),
+            color = cardBg,
+            border = BorderStroke(1.dp, cardBorder)
+        ) {
+            Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Text(
+                    text = "DOL Assistant & Floating Overlay",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = AppColors.onBackground
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text("Voice Announcements", fontSize = 13.5.sp, fontWeight = FontWeight.Medium, color = AppColors.onBackground)
+                        Text("Speak task updates using Android TextToSpeech", fontSize = 11.5.sp, color = AppColors.textSecondary)
+                    }
+                    Switch(
+                        checked = voiceEnabled,
+                        onCheckedChange = { ai.antigem.data.dol.DolVoiceManager.setVoiceEnabled(context, it) }
+                    )
+                }
+                HorizontalDivider(color = cardBorder)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text("Enable Floating DOL", fontSize = 13.5.sp, fontWeight = FontWeight.Medium, color = AppColors.onBackground)
+                        Text(
+                            if (floatingDolEnabled && !hasOverlayPerm) "Waiting for Display over other apps permission"
+                            else "Show draggable DOL mascot above other apps",
+                            fontSize = 11.5.sp,
+                            color = if (floatingDolEnabled && !hasOverlayPerm) AppColors.warning else AppColors.textSecondary
+                        )
+                    }
+                    Switch(
+                        checked = floatingDolEnabled,
+                        onCheckedChange = { enabled ->
+                            val active = ai.antigem.data.dol.DolOverlayManager.setFloatingEnabled(context, enabled)
+                            if (enabled && !active) {
+                                ai.antigem.data.dol.DolOverlayManager.openOverlayPermissionSettings(context)
+                            }
+                        }
+                    )
+                }
             }
         }
 

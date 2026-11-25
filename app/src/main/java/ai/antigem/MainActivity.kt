@@ -141,6 +141,8 @@ class MainActivity : ComponentActivity() {
                 ai.antigem.theme.BrandConfig.init(context)
                 ai.antigem.data.storage.PermissionManager.refresh(context)
                 ai.antigem.data.orchestration.AutonomousTaskEngine.init(context)
+                ai.antigem.data.dol.DolCoordinator.start(context)
+                ai.antigem.data.dol.DolOverlayManager.init(context)
             }
             val initialViewMode = remember {
                 when (chatViewModel.requestedViewMode.value) {

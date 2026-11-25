@@ -123,6 +123,9 @@ fun WorkspaceHomeScreen(
                 }
             }
 
+            // DOL AI Mascot Assistant Card
+            ai.antigem.ui.dol.DolAssistantCard(onClick = onOpenMissions)
+
             // Permission / Storage Revocation Alert Banner (only if not granted)
             AnimatedVisibility(
                 visible = !storageState.hasSharedStorageAccess,

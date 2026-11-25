@@ -623,6 +623,9 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
+        <service
+            android:name="ai.antigem.data.dol.DolOverlayService"
+            android:exported="false" />
     </application>
 
 </manifest>
