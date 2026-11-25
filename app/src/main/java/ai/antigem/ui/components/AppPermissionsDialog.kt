@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.outlined.BatteryChargingFull
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.Mic
 import androidx.compose.material.icons.outlined.NotificationsActive
@@ -78,6 +79,15 @@ object PermissionUtils {
             Manifest.permission.RECORD_AUDIO
         ) == PackageManager.PERMISSION_GRANTED
     }
+
+    fun hasBatteryExemption(context: Context): Boolean {
+        return try {
+            val pm = context.getSystemService(Context.POWER_SERVICE) as? android.os.PowerManager
+            pm?.isIgnoringBatteryOptimizations(context.packageName) ?: false
+        } catch (_: Exception) {
+            false
+        }
+    }
 }
 
 @Composable
@@ -90,6 +100,7 @@ fun AppPermissionsDialog(
 
     var hasNotification by remember { mutableStateOf(PermissionUtils.hasNotificationPermission(context)) }
     var hasStorage by remember { mutableStateOf(PermissionUtils.hasStoragePermission(context)) }
+    var hasBattery by remember { mutableStateOf(PermissionUtils.hasBatteryExemption(context)) }
     var hasAudio by remember { mutableStateOf(PermissionUtils.hasAudioPermission(context)) }
 
     BackHandler(enabled = hasNotification) {
@@ -101,8 +112,14 @@ fun AppPermissionsDialog(
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
                 hasNotification = PermissionUtils.hasNotificationPermission(context)
-                hasStorage = PermissionUtils.hasStoragePermission(context)
+                val newStorage = PermissionUtils.hasStoragePermission(context)
+                if (newStorage && !hasStorage) {
+                    ai.antigem.data.storage.StorageGateway.setupAndRefresh(context)
+                }
+                hasStorage = newStorage
+                hasBattery = PermissionUtils.hasBatteryExemption(context)
                 hasAudio = PermissionUtils.hasAudioPermission(context)
+                ai.antigem.data.storage.PermissionManager.refresh(context)
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -145,6 +162,10 @@ fun AppPermissionsDialog(
         contract = ActivityResultContracts.RequestMultiplePermissions()
     ) {
         hasStorage = PermissionUtils.hasStoragePermission(context)
+        if (hasStorage) {
+            ai.antigem.data.storage.StorageGateway.setupAndRefresh(context)
+        }
+        ai.antigem.data.storage.PermissionManager.refresh(context)
     }
 
     fun requestStorage() {
@@ -175,8 +196,8 @@ fun AppPermissionsDialog(
 
     val textPrimary = if (isDark) TextPrimaryDark else TextPrimaryLight
     val textSecondary = if (isDark) TextSecondaryDark else TextSecondaryLight
-    val allowedCount = listOf(hasNotification, hasStorage, hasAudio).count { it }
-    val progress by animateFloatAsState(allowedCount / 3f, label = "permProgress")
+    val allowedCount = listOf(hasNotification, hasStorage, hasBattery, hasAudio).count { it }
+    val progress by animateFloatAsState(allowedCount / 4f, label = "permProgress")
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -251,7 +272,7 @@ fun AppPermissionsDialog(
                         modifier = Modifier.weight(1f)
                     )
                     Text(
-                        text = L.components.appPermissions.allowedcountOf3Allowed(allowedCount),
+                        text = "$allowedCount of 4 allowed",
                         fontSize = 12.5.sp,
                         color = textSecondary
                     )
@@ -300,10 +321,23 @@ fun AppPermissionsDialog(
                             icon = Icons.Outlined.Folder,
                             accent = GeminiBlue,
                             title = L.common.files,
-                            subtitle = L.components.appPermissions.openProjectsAndFilesOnYour,
+                            subtitle = "Direct shared-storage access for agents without folder pickers",
                             required = false,
                             isGranted = hasStorage,
                             onAllow = { requestStorage() }
+                        )
+                        HorizontalDivider(
+                            modifier = Modifier.padding(start = 68.dp),
+                            color = AppColors.border.copy(alpha = if (isDark) 0.25f else 0.6f)
+                        )
+                        PermissionRow(
+                            icon = Icons.Outlined.BatteryChargingFull,
+                            accent = AppColors.warning,
+                            title = "Background Execution",
+                            subtitle = "Keep AI agents running reliably when minimized",
+                            required = false,
+                            isGranted = hasBattery,
+                            onAllow = { ai.antigem.data.storage.PermissionManager.requestBatteryOptimizationExemption(context) }
                         )
                         HorizontalDivider(
                             modifier = Modifier.padding(start = 68.dp),
@@ -322,10 +356,18 @@ fun AppPermissionsDialog(
                 }
 
                 Spacer(modifier = Modifier.height(12.dp))
+                val limitations = buildList {
+                    if (!hasStorage) add("shared storage (/sdcard) will be inaccessible to agents")
+                    if (!hasBattery) add("Android may pause long background tasks when minimized")
+                    if (!hasAudio) add("voice dictation & Jarvis will be disabled")
+                }
                 Text(
-                    text = L.components.appPermissions.youCanChangeTheseAnytimeIn,
+                    text = if (limitations.isNotEmpty())
+                        "Optional: if skipped, ${limitations.joinToString("; ")}. You can change these anytime in Settings → Permissions."
+                    else
+                        L.components.appPermissions.youCanChangeTheseAnytimeIn,
                     fontSize = 12.sp,
-                    color = textSecondary.copy(alpha = 0.8f),
+                    color = textSecondary.copy(alpha = 0.85f),
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(24.dp))

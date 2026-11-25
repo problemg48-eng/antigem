@@ -95,6 +95,7 @@ object TermuxStorageSetupManager {
             }
 
             Log.i(TAG, "Termux storage symlinks setup successfully at ${storageDir.absolutePath}")
+            ai.antigem.data.storage.StorageGateway.refreshState(context)
             true
         } catch (e: Exception) {
             Log.e(TAG, "Failed to setup storage symlinks: ${e.message}", e)

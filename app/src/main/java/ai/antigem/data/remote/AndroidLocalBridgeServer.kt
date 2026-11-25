@@ -35,7 +35,8 @@ class AndroidLocalBridgeServer private constructor() {
         JARVIS("jarvis_mcp"),
         THEME("theme_mcp"),
         LANGUAGE("language_mcp"),
-        MINI_APP_DEVELOPER("mini_app_developer_mcp")
+        MINI_APP_DEVELOPER("mini_app_developer_mcp"),
+        STORAGE("storage_mcp")
     }
 
     companion object {
@@ -272,6 +273,7 @@ class AndroidLocalBridgeServer private constructor() {
                     path == "/theme" -> handleMcpHttp(McpEndpoint.THEME, method, body, out)
                     path == "/language" -> handleMcpHttp(McpEndpoint.LANGUAGE, method, body, out)
                     path == "/mini_app_developer" -> handleMcpHttp(McpEndpoint.MINI_APP_DEVELOPER, method, body, out)
+                    path == "/storage" -> handleMcpHttp(McpEndpoint.STORAGE, method, body, out)
                     path == "/api/health" -> {
                         val res = JSONObject().apply {
                             put("status", "ok")
@@ -303,7 +305,7 @@ class AndroidLocalBridgeServer private constructor() {
             if (out != null && req != null && !out.used) {
                 runCatching {
                     val path = req.rawPath.substringBefore("?")
-                    if (path == "/browser" || path == "/terminal" || path == "/google_flow" || path == "/extension_developer" || path == "/android" || path == "/notes" || path == "/jarvis" || path == "/theme" || path == "/mini_app_developer") {
+                    if (path == "/browser" || path == "/terminal" || path == "/google_flow" || path == "/extension_developer" || path == "/android" || path == "/notes" || path == "/jarvis" || path == "/theme" || path == "/mini_app_developer" || path == "/storage") {
                         val id = runCatching { JSONObject(req.body).opt("id") }.getOrNull()
                         sendResponse(out, 200, "application/json", jsonRpcError(id, -32603, "Internal error: ${t.message ?: t.javaClass.simpleName}").toString())
                     } else {
@@ -473,6 +475,7 @@ class AndroidLocalBridgeServer private constructor() {
                     if (endpoint == McpEndpoint.THEME) put("instructions", ai.antigem.theme.ThemeMcp.INSTRUCTIONS)
                     if (endpoint == McpEndpoint.LANGUAGE) put("instructions", ai.antigem.i18n.LanguageMcp.INSTRUCTIONS)
                     if (endpoint == McpEndpoint.MINI_APP_DEVELOPER) put("instructions", ai.antigem.ui.miniapps.MiniAppDevMcp.INSTRUCTIONS)
+                    if (endpoint == McpEndpoint.STORAGE) put("instructions", ai.antigem.data.storage.StorageMcp.INSTRUCTIONS)
                     if (endpoint == McpEndpoint.BROWSER) put("instructions", ai.antigem.ui.browser.mcp.BrowserMcp.INSTRUCTIONS + (appContext?.let { ai.antigem.data.rea.ReaManager.browserMcpNote(it) } ?: ""))
                     if (endpoint == McpEndpoint.EXTENSION_DEVELOPER) put("instructions", "Start with webview_extension_docs. Read developer-mcp.md and the required API references, create a draft, write files, install or update, discover tools with webview_extension_test, and inspect logs to fix failures. No app source or manual ZIP handling is needed.")
                     put("capabilities", JSONObject().apply {
@@ -528,6 +531,7 @@ class AndroidLocalBridgeServer private constructor() {
         if (endpoint == McpEndpoint.THEME) return ai.antigem.theme.ThemeMcp.tools()
         if (endpoint == McpEndpoint.LANGUAGE) return ai.antigem.i18n.LanguageMcp.tools()
         if (endpoint == McpEndpoint.MINI_APP_DEVELOPER) return ai.antigem.ui.miniapps.MiniAppDevMcp.tools()
+        if (endpoint == McpEndpoint.STORAGE) return ai.antigem.data.storage.StorageMcp.tools()
         if (endpoint == McpEndpoint.BROWSER) return ai.antigem.ui.browser.mcp.BrowserMcp.tools()
         val tools = JSONArray()
         val terminalEnabled = endpoint == McpEndpoint.TERMINAL
@@ -640,6 +644,7 @@ class AndroidLocalBridgeServer private constructor() {
         if (toolName.startsWith("theme_")) return ai.antigem.theme.ThemeMcp.call(toolName, args)
         if (toolName.startsWith("language_")) return ai.antigem.i18n.LanguageMcp.call(appContext!!, toolName, args)
         if (toolName.startsWith("miniapp_")) return ai.antigem.ui.miniapps.MiniAppDevMcp.call(appContext!!, toolName, args)
+        if (toolName.startsWith("storage_")) return ai.antigem.data.storage.StorageMcp.call(appContext!!, toolName, args)
         if (toolName.startsWith("browser_")) return ai.antigem.ui.browser.mcp.BrowserMcp.call(appContext!!, toolName, args)
 
         if (toolName.startsWith("flow_")) {

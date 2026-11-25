@@ -110,6 +110,7 @@ enum class SettingsSection(private val titleText: () -> String, private val subt
     TERMUX_ONLY({ L.settings.dialog.termuxOnly }, { L.settings.dialog.worksWithTheTermuxEnvironment }),
     BACKUPS({ L.settings.dialog.backupsRestore }, { L.settings.dialog.backupRootfsEnvironmentAndAgyChat }),
     DATA_PROTECTION({ L.settings.dialog.dataLossProtection }, { L.settings.dialog.uninstallShieldAppInfoClearData }),
+    PERMISSIONS({ L.common.permissions }, { "Storage, notifications, background execution and battery" }),
     PROJECT_CHECKPOINTS({ L.settings.dialog.projectCheckpoints }, { L.settings.dialog.goBackToBeforeAnyChat }),
     COMMANDS({ L.settings.dialog.commandsPermissions }, { L.settings.dialog.autoRunPolicySandboxModeAnd }),
     ANTIGRAVITY({ L.common.antigravity }, { L.settings.dialog.accountCliMcpServersSkillsPlugins }),
@@ -677,6 +678,11 @@ fun SettingsDialog(
                         cardBorder = cardBorder
                     )
 
+                    SettingsSection.PERMISSIONS -> PermissionsScreen(
+                        cardBg = cardBg,
+                        cardBorder = cardBorder
+                    )
+
                     SettingsSection.COMMANDS -> CommandsSubScreen(
                         commandAutoExecutionPolicy = commandAutoExecutionPolicy,
                         commandSandboxEnabled = commandSandboxEnabled,
@@ -1064,6 +1070,7 @@ private fun MainSettingsMenu(
                 // backups are of the phone's own Linux environment, so only with it installed and not in server mode
                 if (isLocalToolsInstalled && !ai.antigem.data.preferences.AuthPreferences.currentRemoteMode)
                     row(SettingsSection.BACKUPS, Icons.Outlined.Backup, c.info) else null,
+                row(SettingsSection.PERMISSIONS, Icons.Outlined.VerifiedUser, c.info),
                 row(SettingsSection.DATA_PROTECTION, Icons.Outlined.Security, c.success)
             ),
             listOf(

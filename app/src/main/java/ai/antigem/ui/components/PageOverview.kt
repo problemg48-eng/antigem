@@ -250,8 +250,11 @@ class PageChangeState(initial: AppViewMode, private val onLeave: (AppViewMode) -
 private data class OverviewPage(val id: String, val mode: AppViewMode, val label: String, val icon: ImageVector)
 
 private fun overviewPage(id: String): OverviewPage? = when (id.lowercase()) {
+    "home" -> OverviewPage("home", AppViewMode.HOME, "Home", Icons.Outlined.Home)
     "chat" -> OverviewPage("chat", AppViewMode.CHAT, L.common.chat, Icons.Outlined.ChatBubbleOutline)
+    "agents" -> OverviewPage("agents", AppViewMode.AGENTS, "Agents", Icons.Outlined.SmartToy)
     "ide" -> OverviewPage("ide", AppViewMode.IDE, "IDE", Icons.Outlined.Code)
+    "missions" -> OverviewPage("missions", AppViewMode.MISSIONS, "Missions", Icons.Outlined.RocketLaunch)
     "terminal" -> OverviewPage("terminal", AppViewMode.TERMINAL, L.common.terminal, Icons.Outlined.Terminal)
     "browser" -> OverviewPage("browser", AppViewMode.BROWSER, L.common.browser, Icons.Outlined.Language)
     "notes" -> OverviewPage("notes", AppViewMode.NOTES, L.common.notes, Icons.Outlined.EditNote)

@@ -61,6 +61,9 @@ open class AntiGemService : Service(), LifecycleOwner, ViewModelStoreOwner, Save
         private const val CHANNEL_ID = "antigem_termux_service_channel"
         private const val NOTIFICATION_ID = 1337
 
+        private val _isRunning = kotlinx.coroutines.flow.MutableStateFlow(false)
+        val isRunning: kotlinx.coroutines.flow.StateFlow<Boolean> = _isRunning
+
         const val ACTION_WAKE_LOCK = "ai.antigem.service_wake_lock"
         const val ACTION_WAKE_UNLOCK = "ai.antigem.service_wake_unlock"
         const val ACTION_STOP_SERVICE = "ai.antigem.service_stop"
@@ -117,6 +120,9 @@ open class AntiGemService : Service(), LifecycleOwner, ViewModelStoreOwner, Save
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
+        _isRunning.value = true
+        ai.antigem.data.storage.AgentNotificationManager.ensureChannels(this)
+        ai.antigem.data.storage.PermissionManager.refresh(this)
         runStartForeground()
         observeTerminalSessions()
         ai.antigem.data.remote.AndroidLocalBridgeServer.instance.start(this)
@@ -149,6 +155,7 @@ open class AntiGemService : Service(), LifecycleOwner, ViewModelStoreOwner, Save
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onDestroy() {
+        _isRunning.value = false
         serviceScope.cancel()
         actionReleaseWakeLock()
 

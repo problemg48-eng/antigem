@@ -29,8 +29,11 @@ import ai.antigem.ui.components.pageSnapshotSource
 import ai.antigem.i18n.L
 
 enum class AppViewMode {
+    HOME,
     CHAT,
+    AGENTS,
     IDE,
+    MISSIONS,
     TERMINAL,
     BROWSER,
     NOTES,
@@ -134,8 +137,16 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(themeMode) { ai.antigem.theme.ThemeManager.syncSystemNightMode(themeMode) }
 
             val requestedMode by chatViewModel.requestedViewMode.collectAsState()
+            LaunchedEffect(Unit) {
+                ai.antigem.theme.BrandConfig.init(context)
+                ai.antigem.data.storage.PermissionManager.refresh(context)
+                ai.antigem.data.orchestration.AutonomousTaskEngine.init(context)
+            }
             val initialViewMode = remember {
                 when (chatViewModel.requestedViewMode.value) {
+                    "HOME" -> AppViewMode.HOME
+                    "AGENTS" -> AppViewMode.AGENTS
+                    "MISSIONS" -> AppViewMode.MISSIONS
                     "IDE" -> AppViewMode.IDE
                     "TERMINAL" -> AppViewMode.TERMINAL
                     "BROWSER" -> AppViewMode.BROWSER
@@ -161,6 +172,21 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(requestedMode) {
                 requestedMode?.let { mode ->
                     when (mode) {
+                        "HOME" -> {
+                            previousViewMode = currentViewMode
+                            currentViewMode = AppViewMode.HOME
+                        }
+
+                        "AGENTS" -> {
+                            previousViewMode = currentViewMode
+                            currentViewMode = AppViewMode.AGENTS
+                        }
+
+                        "MISSIONS" -> {
+                            previousViewMode = currentViewMode
+                            currentViewMode = AppViewMode.MISSIONS
+                        }
+
                         "IDE" -> {
                             previousViewMode = currentViewMode
                             currentViewMode = AppViewMode.IDE
@@ -594,6 +620,155 @@ class MainActivity : ComponentActivity() {
                                                 previousViewMode = currentViewMode
                                                 currentViewMode = AppViewMode.CHAT
                                             }
+                                        )
+                                    }
+                                }
+
+                                // Persistent Home Dashboard
+                                val conversations by chatViewModel.conversations.collectAsState()
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .graphicsLayer {
+                                            val isVisible = currentViewMode == AppViewMode.HOME
+                                            alpha = if (isVisible) 1f else 0f
+                                            translationX = if (isVisible) 0f else 20000f
+                                        }
+                                ) {
+                                    if (currentViewMode == AppViewMode.HOME) {
+                                        ai.antigem.ui.home.WorkspaceHomeScreen(
+                                            conversations = conversations,
+                                            onOpenChats = {
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.CHAT
+                                            },
+                                            onSelectConversation = { id ->
+                                                chatViewModel.selectConversation(id)
+                                            },
+                                            onNewChat = {
+                                                chatViewModel.startNewChat()
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.CHAT
+                                            },
+                                            onOpenAgents = {
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.AGENTS
+                                            },
+                                            onOpenProjects = {
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.IDE
+                                            },
+                                            onOpenMissions = {
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.MISSIONS
+                                            },
+                                            onOpenBrowser = {
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.BROWSER
+                                            },
+                                            onOpenTerminal = {
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.TERMINAL
+                                            },
+                                            onOpenPermissions = {
+                                                chatViewModel.requestSettingsSection("PERMISSIONS")
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.CHAT
+                                            },
+                                            onOpenSettings = {
+                                                chatViewModel.requestSettingsSection("MAIN")
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.CHAT
+                                            }
+                                        )
+                                    }
+                                }
+
+                                // Persistent Agents Hub
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .graphicsLayer {
+                                            val isVisible = currentViewMode == AppViewMode.AGENTS
+                                            alpha = if (isVisible) 1f else 0f
+                                            translationX = if (isVisible) 0f else 20000f
+                                        }
+                                ) {
+                                    if (currentViewMode == AppViewMode.AGENTS) {
+                                        ai.antigem.ui.agents.AgentsHubScreen(
+                                            onSwitchToAgentChat = { kind ->
+                                                chatViewModel.startNewChat(kind)
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.CHAT
+                                            },
+                                            onOpenAgentSettings = {
+                                                chatViewModel.requestSettingsSection("AGENTS")
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.CHAT
+                                            }
+                                        )
+                                    }
+                                }
+
+                                // Persistent Missions Screen
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .graphicsLayer {
+                                            val isVisible = currentViewMode == AppViewMode.MISSIONS
+                                            alpha = if (isVisible) 1f else 0f
+                                            translationX = if (isVisible) 0f else 20000f
+                                        }
+                                ) {
+                                    if (currentViewMode == AppViewMode.MISSIONS) {
+                                        ai.antigem.ui.missions.MissionsScreen()
+                                    }
+                                }
+
+                                // Workspace Bottom Navigation Bar on Home / Agents / Missions
+                                if (currentViewMode == AppViewMode.HOME ||
+                                    currentViewMode == AppViewMode.AGENTS ||
+                                    currentViewMode == AppViewMode.MISSIONS
+                                ) {
+                                    NavigationBar(
+                                        modifier = Modifier.align(Alignment.BottomCenter),
+                                        containerColor = ai.antigem.theme.AppColors.card
+                                    ) {
+                                        NavigationBarItem(
+                                            selected = currentViewMode == AppViewMode.HOME,
+                                            onClick = { currentViewMode = AppViewMode.HOME },
+                                            icon = { Icon(androidx.compose.material.icons.Icons.Outlined.Home, null) },
+                                            label = { Text("Home") }
+                                        )
+                                        NavigationBarItem(
+                                            selected = false,
+                                            onClick = {
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.CHAT
+                                            },
+                                            icon = { Icon(androidx.compose.material.icons.Icons.Outlined.ChatBubbleOutline, null) },
+                                            label = { Text("Chats") }
+                                        )
+                                        NavigationBarItem(
+                                            selected = currentViewMode == AppViewMode.AGENTS,
+                                            onClick = { currentViewMode = AppViewMode.AGENTS },
+                                            icon = { Icon(androidx.compose.material.icons.Icons.Outlined.SmartToy, null) },
+                                            label = { Text("Agents") }
+                                        )
+                                        NavigationBarItem(
+                                            selected = false,
+                                            onClick = {
+                                                previousViewMode = currentViewMode
+                                                currentViewMode = AppViewMode.IDE
+                                            },
+                                            icon = { Icon(androidx.compose.material.icons.Icons.Outlined.Code, null) },
+                                            label = { Text("Projects") }
+                                        )
+                                        NavigationBarItem(
+                                            selected = currentViewMode == AppViewMode.MISSIONS,
+                                            onClick = { currentViewMode = AppViewMode.MISSIONS },
+                                            icon = { Icon(androidx.compose.material.icons.Icons.Outlined.RocketLaunch, null) },
+                                            label = { Text("Missions") }
                                         )
                                     }
                                 }

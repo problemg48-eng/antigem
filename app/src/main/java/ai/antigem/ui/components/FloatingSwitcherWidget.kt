@@ -336,8 +336,11 @@ fun FloatingSwitcherWidget(
             items.forEach { itemId ->
                 val id = itemId.lowercase()
                 val isSelected = when (id) {
+                    "home" -> currentViewMode == AppViewMode.HOME
                     "chat" -> currentViewMode == AppViewMode.CHAT
+                    "agents" -> currentViewMode == AppViewMode.AGENTS
                     "ide" -> currentViewMode == AppViewMode.IDE
+                    "missions" -> currentViewMode == AppViewMode.MISSIONS
                     "browser" -> currentViewMode == AppViewMode.BROWSER
                     "terminal" -> currentViewMode == AppViewMode.TERMINAL
                     "notes" -> currentViewMode == AppViewMode.NOTES
@@ -346,8 +349,11 @@ fun FloatingSwitcherWidget(
                     else -> false
                 }
                 val iconVector: ImageVector = when (id) {
+                    "home" -> Icons.Outlined.Home
                     "chat" -> Icons.Outlined.ChatBubbleOutline
+                    "agents" -> Icons.Outlined.SmartToy
                     "ide" -> Icons.Outlined.Code
+                    "missions" -> Icons.Outlined.RocketLaunch
                     "terminal" -> Icons.Outlined.Terminal
                     "browser" -> Icons.Outlined.Language
                     "notes" -> Icons.Outlined.EditNote
