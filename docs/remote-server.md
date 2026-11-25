@@ -1,4 +1,4 @@
-# Running AntiGem on a server (Server mode)
+# Running Cosmic Codex on a server (Server mode)
 
 In Server mode the IDE bridge, the Antigravity hub (`agy`) and Claude Code run on a server (a VPS, a home server, any
 Linux box) instead of on the phone. The phone only shows the UI: chats, the editor, the terminal. The agents, your
@@ -28,7 +28,7 @@ server runs*, pick one:
 
 ```
 SSH tunnel mode (recommended)
-phone (AntiGem app)                                   server
+phone (Cosmic Codex app)                                   server
  └─ SSH (port 22)  ─────────────────────────────────►  sshd
       · phone 127.0.0.1:1234 ──(tunnel)──► bridge   (REST + WebSocket)  on the server's 127.0.0.1:1234
       · phone 127.0.0.1:1235 ──(tunnel)──► agy hub  (gRPC over HTTP/2)   on the server's 127.0.0.1:1235
@@ -38,7 +38,7 @@ phone (AntiGem app)                                   server
       · adb: the server's adb reaches the phone's adb (optional)
 
 Server mode (domain or open ports)
-phone (AntiGem app)                              server
+phone (Cosmic Codex app)                              server
  ├─ https://bridge.example.com  ──────────────►  bridge   (REST + WebSocket)   :1234
  ├─ https://hub.example.com     ──────────────►  agy hub  (gRPC over HTTP/2)    :1235
  └─ SSH (port 22)               ──────────────►  sshd (start / stop, terminal, reverse tunnels, adb, as above)
@@ -72,7 +72,7 @@ phone (AntiGem app)                              server
 * **Only this app on this phone can use it.** A desktop browser or a second device cannot reach the bridge unless you
   open your own `ssh -L` tunnel there.
 * **The ports must be free on the phone.** The tunnel opens the bridge and hub ports on the phone's `127.0.0.1`. If
-  something else on the phone already uses them (for example the local bridge of the old `com.termux` build of AntiGem on
+  something else on the phone already uses them (for example the local bridge of the old `com.termux` build of Cosmic Codex on
   the same ports), the tunnel cannot open: use other ports in the addresses.
 * **The SSH key is the master key.** Whoever has it has the bridge too (in Server mode they have a shell anyway, so this
   is no worse, but protect the key).
@@ -131,7 +131,7 @@ Contents
 
 * Linux, x86_64 (most VPS) or aarch64 (ARM VPS, Raspberry Pi). Check with `uname -m`.
 * `sshd`, `tmux` (strongly recommended: the bridge keeps running when the SSH connection drops) and `git`.
-* A **normal user** for AntiGem, not root. The bridge can read and write everything that user can.
+* A **normal user** for Cosmic Codex, not root. The bridge can read and write everything that user can.
 * About 1 GB of RAM free for the agents. Node.js 18 or newer only if you use browser plugins.
 
 **Reaching it from the phone: pick one**
@@ -148,7 +148,7 @@ See [Two ways to connect](#two-ways-to-connect-which-one-to-use) for the pros an
 > the path can read it, and with it read and write files and run commands on your server. Plain `http://` is fine on a
 > private network or a VPN (Tailscale, WireGuard).
 
-**Phone:** the AntiGem app. It needs internet access to the server while you use it.
+**Phone:** the Cosmic Codex app. It needs internet access to the server while you use it.
 
 ---
 
@@ -255,7 +255,7 @@ bridge starts fine without `agy` for this reason.
 
 Check: `~/.local/bin/agy --version`.
 
-> **The `agy` file must be writable by the AntiGem user.** When the bridge starts the hub it writes the security token
+> **The `agy` file must be writable by the Cosmic Codex user.** When the bridge starts the hub it writes the security token
 > into the `agy` binary (a small in-place patch). Keep it in your own home (`~/.local/bin`), not in `/usr/bin` as
 > root, or the hub will refuse to start with "Failed to patch AGY binary". If the installed `agy` is a small wrapper script,
 > the bridge patches the large `agy.va39` file next to it.
@@ -345,7 +345,7 @@ The rest of section 6 is about **Server mode**.
 | Bridge | **1234** | REST + WebSocket: files, git, chats relay, Claude, plugins |
 | Hub (`agy`) | **1235** | gRPC over HTTP/2: Antigravity chats |
 
-AntiGem (`ai.antigem`) uses **1236 / 1237** by default; the old `com.termux` build used 1234 / 1235. The app shows the numbers under the address boxes and as placeholders in *Ports on the
+Cosmic Codex (`ai.antigem`) uses **1236 / 1237** by default; the old `com.termux` build used 1234 / 1235. The app shows the numbers under the address boxes and as placeholders in *Ports on the
 server*. Use those numbers wherever this guide says 1234 / 1235.
 
 How the app starts the services depends on the address you type:
@@ -820,7 +820,7 @@ Your chats and projects are not touched by any of this.
 
 ### 15.1 There is no guarantee
 
-* AntiGem's bridge gives whoever controls it **the same power as the server user**: read and write every file that user
+* Cosmic Codex's bridge gives whoever controls it **the same power as the server user**: read and write every file that user
   can, run the agents (which run commands), use git, read the keys and logins in that home folder.
 * The software is young and **has not been independently audited**. It has had bugs in exactly this area (for example a
   version of the bridge once sent its secret token back in a response header; it is fixed, but that shows how things go

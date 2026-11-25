@@ -1,6 +1,6 @@
 # Connect to PC: pairing protocol
 
-This describes how the AntiGem app (phone) pairs with AntiGem in VS Code (PC). After pairing, the phone uses the
+This describes how the Cosmic Codex app (phone) pairs with Cosmic Codex in VS Code (PC). After pairing, the phone uses the
 agents of the bridge VS Code runs on the PC, through an SSH tunnel.
 
 - Phone side, already built: `app/.../data/pc/PcConnect.kt` and `PcPairingCrypto.kt`.

@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="docs/readme/icon.svg" alt="AntiGem app icon" width="112">
+<img src="docs/readme/icon.svg" alt="Cosmic Codex app icon" width="112">
 
-# AntiGem
+# Cosmic Codex
 
 *A gem that defies gravity. A full coding environment, light enough to carry in your pocket.*
 
@@ -17,19 +17,19 @@
 
 <br>
 
-[![Join the AntiGem Discord](https://img.shields.io/badge/Join%20the%20AntiGem%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/pJvvTDTc6G)
+[![Join the Cosmic Codex Discord](https://img.shields.io/badge/Join%20the%20AntiGem%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/pJvvTDTc6G)
 
 **Get help, share what you build, request features and hear about new releases first.**
 
 <br>
 
-<img src="docs/readme/hero.webp" alt="AntiGem on a phone: code editor, live browser preview, Claude Code chat, Linux terminal and model picker" width="100%">
+<img src="docs/readme/hero.webp" alt="Cosmic Codex on a phone: code editor, live browser preview, Claude Code chat, Linux terminal and model picker" width="100%">
 
 </div>
 
 > [!IMPORTANT]
-> ### AntiGem has a new home: `ai.antigem`
-> From **v2.0.0**, AntiGem is released under its own package name, **`ai.antigem`**. The old app was installed as `com.termux`, the Termux project's package name, which we used only so Termux packages could run at full speed. Shipping AntiGem under another project's name wasn't right, and it also stopped AntiGem from being installed next to the real Termux app. AntiGem now rewrites `com.termux` to `ai.antigem` inside each package as it installs (both names are 10 characters, so it is swapped byte for byte), with no proot and no slowdown.
+> ### Cosmic Codex has a new home: `ai.antigem`
+> From **v2.0.0**, Cosmic Codex is released under its own package name, **`ai.antigem`**. The old app was installed as `com.termux`, the Termux project's package name, which we used only so Termux packages could run at full speed. Shipping Cosmic Codex under another project's name wasn't right, and it also stopped Cosmic Codex from being installed next to the real Termux app. Cosmic Codex now rewrites `com.termux` to `ai.antigem` inside each package as it installs (both names are 10 characters, so it is swapped byte for byte), with no proot and no slowdown.
 >
 > - **The old app keeps working.** Its last version is **v1.2.1** and it gets no more updates. New features and fixes only come to `ai.antigem`.
 > - **You can use both.** The new app installs next to the old one; nothing in the old one is touched. Move over whenever you're ready.
@@ -91,7 +91,7 @@ A full tour on a real phone: launch, chats, settings and themes, then Claude Cod
 
 ## What it is
 
-AntiGem runs four coding agents on your phone:
+Cosmic Codex runs four coding agents on your phone:
 
 - **Antigravity (`agy`)**: Google's official `agy` CLI, installed with Google's own installer, runs inside the app's Linux environment.
 - **Claude Code**: Anthropic's official `claude` CLI runs inside the app's Linux environment, and the app talks to it over its stream-json protocol, with one CLI process per chat.
@@ -183,8 +183,8 @@ Each one is a one-tap preset in **Settings → MCP Servers**, for every agent.
 | **Terminal** | Create terminal sessions, send commands, read output, kill processes, and change the terminal's theme and font. |
 | **Android** | Read the screen's UI tree, tap, swipe, scroll, type, press keys, take screenshots, launch and list apps, open intents, and (with ADB) install, uninstall or force-stop apps and run `adb shell`. |
 | **Notes & To-dos** | List, read, create, edit and delete your notes and to-do items. |
-| **Custom Plugin** | Use the tools of any installed AntiGem plugin. |
-| **Plugin Developer** | Create, install, test and debug AntiGem plugins from the chat. |
+| **Custom Plugin** | Use the tools of any installed Cosmic Codex plugin. |
+| **Plugin Developer** | Create, install, test and debug Cosmic Codex plugins from the chat. |
 | **Jarvis** | Control the app for the Jarvis voice mode: speak and ask, run and watch tasks, chats, models, settings, approvals, the IDE and more ([docs/jarvis.md](docs/jarvis.md)). |
 | **Theme** | List, switch, create, edit, import and export the app's color themes. |
 | **Stitch** | Google Stitch UI design, with your own API key. |
@@ -199,7 +199,7 @@ Each one is a one-tap preset in **Settings → MCP Servers**, for every agent.
 - **Settings → Android Development** sets up everything to build **Kotlin / Jetpack Compose, Flutter and React Native** apps on the phone itself, and the agent can drive the builds.
 - Builds target arm64 phones. For other CPU types, build on a PC.
 
-### Custom AntiGem plugins
+### Custom Cosmic Codex plugins
 - Plugins are small packages with a `manifest.json` and a JavaScript worker that add MCP tools, and can include Markdown **skills** that teach the agent how to use them.
 - They run in the app's own extension host, which implements a large part of the Chrome extension API (`tabs`, `scripting`, `storage`, `debugger` and more), so many Chrome extension workers can be ported.
 - Install from a ZIP, or from a plugin repository on GitHub. The app checks repositories for updates in the background.
@@ -215,8 +215,8 @@ Each one is a one-tap preset in **Settings → MCP Servers**, for every agent.
 
 ### Ubuntu chroot (rooted phones)
 On a rooted phone (Magisk, KernelSU or APatch), the agents and the terminal can run in a **real Ubuntu** instead of the built-in environment: `apt`, `glibc` and `sudo`, at full speed, with no proot.
-- **One setup page:** official Ubuntu 24.04, 26.04 or 22.04 (checksum checked), AntiGem's prebuilt image, a URL or a file; where it is installed, its user, phone storage, USB drives, shared folders and packages.
-- **Switch any time** between **AntiGem**, **Ubuntu chroot** and **your server** in **Settings → Where agents run**. Both phone environments can be installed side by side.
+- **One setup page:** official Ubuntu 24.04, 26.04 or 22.04 (checksum checked), Cosmic Codex's prebuilt image, a URL or a file; where it is installed, its user, phone storage, USB drives, shared folders and packages.
+- **Switch any time** between **Cosmic Codex**, **Ubuntu chroot** and **your server** in **Settings → Where agents run**. Both phone environments can be installed side by side.
 - **Its own page:** start and stop, live mounts, disk use, packages, backup and restore, and a safe delete that never touches your files.
 - **Safe by default:** its mounts live in a private namespace, so nothing outside the chroot can reach your files through it. USB drives plugged in later still show up, and fastboot / adb over OTG work.
 - **Root inside the chroot is root of the phone**, so read the risks first. Full guide: **[docs/chroot.md](docs/chroot.md)**.
@@ -232,22 +232,22 @@ On a rooted phone (Magisk, KernelSU or APatch), the agents and the terminal can 
 - In-app browser for previewing local dev servers and testing web apps.
 - Desktop and mobile modes, a steady browser identity that keeps Google sign-in working, and built-in Eruda DevTools.
 
-### Connect to PC (with AntiGem for VS Code)
-Use the agents running on your PC from your phone. [AntiGem for VS Code](https://github.com/Santoshkurmi/antigem_vscode_extension) runs them on the PC, and the app becomes a second screen for the same chats.
+### Connect to PC (with Cosmic Codex for VS Code)
+Use the agents running on your PC from your phone. [Cosmic Codex for VS Code](https://github.com/Santoshkurmi/antigem_vscode_extension) runs them on the PC, and the app becomes a second screen for the same chats.
 - **Same chats on both:** start a chat in VS Code and continue it on the phone, or the other way round. Replies stream live on both, and every agent (Antigravity, Claude Code, Codex, OpenCode) works, with its subagents, images and files.
 - **Pair once, no typing of addresses:** in VS Code open **Settings → Connect phone → Start pairing**. On the phone, turn on **Settings → Connect to PC**, tap **Add a PC**, pick the PC from **Nearby PCs** and type the 6-digit code it shows. If the PC is not listed (guest Wi-Fi), type the address shown on the PC.
 - **Switch in one tap:** the PC button in the side bar lists your paired PCs; pick one, or go back to **Use this phone**. Several PCs can be paired.
 - **Copy files between phone and PC:** in this mode the Files screen has a **This phone** tab next to the PC's files. Copy or cut on one side, paste on the other, folders too.
 - **Terminal on the PC (optional):** with **Allow terminal from phone** on in VS Code, the app's terminal and Run configurations open on the PC. Off (the default), they stay on the phone.
-- **Secure by design:** the phone connects over SSH with its own key; no PC password is stored. The code is checked with SPAKE2, so nobody on the Wi-Fi can learn it. The key can only reach AntiGem on the PC (plus a shell if you allow the terminal). Remove a phone in VS Code to lock it out at once.
-- **What the PC needs:** AntiGem for VS Code, and its SSH server turned on (Linux: `openssh-server`; macOS: *Remote Login*; Windows: the *OpenSSH Server* feature). VS Code shows the steps for your system.
+- **Secure by design:** the phone connects over SSH with its own key; no PC password is stored. The code is checked with SPAKE2, so nobody on the Wi-Fi can learn it. The key can only reach Cosmic Codex on the PC (plus a shell if you allow the terminal). Remove a phone in VS Code to lock it out at once.
+- **What the PC needs:** Cosmic Codex for VS Code, and its SSH server turned on (Linux: `openssh-server`; macOS: *Remote Login*; Windows: the *OpenSSH Server* feature). VS Code shows the steps for your system.
 
 ### Notes
 - Notes and to-do lists inside the app and in the floating bubble.
 - Agents can read and update them through the Notes MCP.
 
 ### App languages
-- Every text in the app can be translated. The app ships only English: other languages are made by the community and downloaded in **Settings → Language → Get more languages** from the [AntiGem Languages](https://github.com/Santoshkurmi/antigem_languages) repository.
+- Every text in the app can be translated. The app ships only English: other languages are made by the community and downloaded in **Settings → Language → Get more languages** from the [Cosmic Codex Languages](https://github.com/Santoshkurmi/antigem_languages) repository.
 - Downloaded languages show who made them and get an **Update** button when their translation improves. They're read-only: duplicate one to change it, and updates never touch your copy.
 - Make your own language in the app, or let an agent translate the app through the Language MCP while you watch it change. Then send it to the community so everyone can use it.
 - Right-to-left languages, plural rules per language, and a setting for the language agents reply in.
@@ -267,28 +267,28 @@ Get the latest APK from [Releases](https://github.com/santoshkurmi/antigem/relea
 **Server mode** (a mode, not another build): the bridge, the agents (`agy`, Claude Code, OpenCode, Codex), your projects and the terminal run on **your own server (a VPS)**, and the phone is only the screen. Switch it on in **Settings → Where agents run**. See [Server mode](#server-mode-run-it-on-a-vps) below.
 
 > [!NOTE]
-> **Coming from the old `com.termux` build of AntiGem?** Android treats `ai.antigem` as a different app, so your files don't move over by themselves:
+> **Coming from the old `com.termux` build of Cosmic Codex?** Android treats `ai.antigem` as a different app, so your files don't move over by themselves:
 > 1. In the old app, open **Settings → Backups & Restore → Back up environment**. Tick *Include SSH keys and sign-ins* to keep your logins (never share that file with anyone). The backup is saved to `Download/Antigem/backups/bootrapz_<time>.zip`.
 > 2. Install `ai.antigem`. On its setup screen, choose **From a ZIP file** and pick that backup.
 > 3. Once everything works, uninstall the old app, and delete the backup if it has your sign-ins.
 
 ### How it runs Termux packages without being `com.termux`
 
-Termux packages are compiled for the fixed path `/data/data/com.termux/files/usr`. Instead of faking that path with **proot** (which slows down every program) or rebuilding every package, AntiGem rewrites `com.termux` to `ai.antigem` in each package when it is installed: in file paths, file contents, symlinks and install scripts. Both names are 10 characters long, so the rewrite changes bytes in place and binaries keep their layout.
+Termux packages are compiled for the fixed path `/data/data/com.termux/files/usr`. Instead of faking that path with **proot** (which slows down every program) or rebuilding every package, Cosmic Codex rewrites `com.termux` to `ai.antigem` in each package when it is installed: in file paths, file contents, symlinks and install scripts. Both names are 10 characters long, so the rewrite changes bytes in place and binaries keep their layout.
 
-It happens by itself for the bootstrap, for restored backups, for `pkg install` / `apt install` (an apt hook) and for `dpkg -i` (a dpkg wrapper). One Termux file can't be rewritten that way: `am.apk`, the Java code of the `am` command, which Termux builds to send intents as `com.termux`. AntiGem builds it from Termux's own source (the `termux-am` submodule) for `ai.antigem` and puts it in place of Termux's. Everything runs at full native speed from the official Termux repositories. In your home folder only paths are rewritten, so your own files that mention `com.termux` stay as they are.
+It happens by itself for the bootstrap, for restored backups, for `pkg install` / `apt install` (an apt hook) and for `dpkg -i` (a dpkg wrapper). One Termux file can't be rewritten that way: `am.apk`, the Java code of the `am` command, which Termux builds to send intents as `com.termux`. Cosmic Codex builds it from Termux's own source (the `termux-am` submodule) for `ai.antigem` and puts it in place of Termux's. Everything runs at full native speed from the official Termux repositories. In your home folder only paths are rewritten, so your own files that mention `com.termux` stay as they are.
 
 For a full Ubuntu, install it in the terminal: `pkg install proot-distro && proot-distro install ubuntu`.
 
 ### This is not a Termux fork
 
-AntiGem is not a copy or modification of the Termux app. The app was written from scratch. It uses only Termux's open-source **terminal-emulator** and **terminal-view** libraries for drawing the terminal, and the Termux bootstrap and package repositories for the Linux environment. The UI, the agent integrations, the Go bridge, the MCP servers, the plugin system and everything else are AntiGem's own code.
+Cosmic Codex is not a copy or modification of the Termux app. The app was written from scratch. It uses only Termux's open-source **terminal-emulator** and **terminal-view** libraries for drawing the terminal, and the Termux bootstrap and package repositories for the Linux environment. The UI, the agent integrations, the Go bridge, the MCP servers, the plugin system and everything else are Cosmic Codex's own code.
 
 ### Termux compatibility
 
 Packages, `apt`/`pkg`, the shell and almost everything else work as in Termux.
 
-AntiGem has the common Termux:API commands built in. It installs Termux's `termux-api` package (the `termux-*` commands) during setup, so they work right away:
+Cosmic Codex has the common Termux:API commands built in. It installs Termux's `termux-api` package (the `termux-*` commands) during setup, so they work right away:
 
 | Command | Built in |
 | :--- | :---: |
@@ -305,22 +305,22 @@ AntiGem has the common Termux:API commands built in. It installs Termux's `termu
 
 For advanced hardware APIs (such as `termux-location`, `termux-camera-photo`, `termux-sensor`, `termux-sms-*`, `termux-wifi-*`), install the matching signed companion app:
 
-👉 **[Download AntiGem Termux:API Companion App](https://github.com/Santoshkurmi/termux-api/releases)**
+👉 **[Download Cosmic Codex Termux:API Companion App](https://github.com/Santoshkurmi/termux-api/releases)**
 
 > [!IMPORTANT]
-> The companion app must be AntiGem's build for `ai.antigem`: it shares AntiGem's Linux user (`sharedUserId ai.antigem`) to talk to it over UNIX sockets. Companion apps made for the old `com.termux` build, or the official Termux:API, don't work with it.
+> The companion app must be Cosmic Codex's build for `ai.antigem`: it shares Cosmic Codex's Linux user (`sharedUserId ai.antigem`) to talk to it over UNIX sockets. Companion apps made for the old `com.termux` build, or the official Termux:API, don't work with it.
 >
 > **Moving from the old `com.termux` app?** Download the Termux:API companion again from the [releases page](https://github.com/Santoshkurmi/termux-api/releases) and install it for `ai.antigem`. Don't keep using the companion you installed for the old app: it only works with the old app.
 
-**How to enable:** install the companion APK from the [releases page](https://github.com/Santoshkurmi/termux-api/releases), then choose **AntiGem's Termux:API app** in **Settings → Termux Support → Termux:API**. One handler is used at a time: *Built-in* (the default) or the app, which then handles every `termux-*` command. AntiGem's dispatcher and the package's own binary sit side by side (`dpkg-divert`), so switching needs no reinstall, and installing or updating `termux-api` never breaks either of them.
+**How to enable:** install the companion APK from the [releases page](https://github.com/Santoshkurmi/termux-api/releases), then choose **Cosmic Codex's Termux:API app** in **Settings → Termux Support → Termux:API**. One handler is used at a time: *Built-in* (the default) or the app, which then handles every `termux-*` command. Cosmic Codex's dispatcher and the package's own binary sit side by side (`dpkg-divert`), so switching needs no reinstall, and installing or updating `termux-api` never breaks either of them.
 
 #### X11 desktop
 
-AntiGem can run a Linux desktop (XFCE or LXQt) with [Termux:X11](https://github.com/termux/termux-x11). It uses AntiGem's own build of Termux:X11, signed to share AntiGem's Linux user, so the desktop runs inside AntiGem's process and Android doesn't slow it down or stop it while you use it.
+Cosmic Codex can run a Linux desktop (XFCE or LXQt) with [Termux:X11](https://github.com/termux/termux-x11). It uses Cosmic Codex's own build of Termux:X11, signed to share Cosmic Codex's Linux user, so the desktop runs inside Cosmic Codex's process and Android doesn't slow it down or stop it while you use it.
 
 Go to **Settings → Termux Support → X11 Desktop** and follow the steps: install the Termux:X11 app, the `termux-x11` command and a desktop, then tap **Start**.
 
-To set it up by hand instead, get `antigem-termux-x11-sharedUid.apk` and `antigem-termux-x11-*-all.deb` from the [AntiGem Termux:X11 releases](https://github.com/Santoshkurmi/termux-x11/releases/latest), install the APK, and run:
+To set it up by hand instead, get `antigem-termux-x11-sharedUid.apk` and `antigem-termux-x11-*-all.deb` from the [Cosmic Codex Termux:X11 releases](https://github.com/Santoshkurmi/termux-x11/releases/latest), install the APK, and run:
 
 ```bash
 pkg install x11-repo
@@ -332,7 +332,7 @@ termux-x11 :0 -xstartup "dbus-launch --exit-with-session xfce4-session"
 Then open Termux:X11. Don't install `termux-x11-nightly` from x11-repo: it only works with the official Termux:X11 app.
 
 > [!IMPORTANT]
-> **Moving from the old `com.termux` app?** Download AntiGem's Termux:X11 app and `.deb` again from the [AntiGem Termux:X11 releases](https://github.com/Santoshkurmi/termux-x11/releases/latest) and install them for `ai.antigem`. Don't keep using the Termux:X11 app you installed for the old app: it only works with the old app.
+> **Moving from the old `com.termux` app?** Download Cosmic Codex's Termux:X11 app and `.deb` again from the [Cosmic Codex Termux:X11 releases](https://github.com/Santoshkurmi/termux-x11/releases/latest) and install them for `ai.antigem`. Don't keep using the Termux:X11 app you installed for the old app: it only works with the old app.
 
 ---
 
@@ -340,7 +340,7 @@ Then open Termux:X11. Don't install `termux-x11-nightly` from x11-repo: it only 
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                           AntiGem Android app                            │
+│                           Cosmic Codex Android app                            │
 │         Compose UI · terminal · editor · browser · MCPs · Jarvis         │
 └───────────────────────┬─────────────────────────────────┬────────────────┘
                         │ HTTP / WebSocket                │ HTTP / WS
@@ -363,7 +363,7 @@ Then open Termux:X11. Don't install `termux-x11-nightly` from x11-repo: it only 
 
 ## Server mode (run it on a VPS)
 
-By default everything runs on the phone. In **Server mode** the heavy part moves to a Linux server that you own (a VPS, a home server, a spare PC): the **IDE bridge**, the **Antigravity hub (`agy`)**, **Claude Code**, your **projects, files, git and the shell** all live there, and AntiGem on the phone only shows the UI. It is the same app and the same interface, but the chats, the files and the agents' accounts live on the server (they are separate from any chats you have in local mode), so the agents keep working when the phone sleeps, and the phone stays light.
+By default everything runs on the phone. In **Server mode** the heavy part moves to a Linux server that you own (a VPS, a home server, a spare PC): the **IDE bridge**, the **Antigravity hub (`agy`)**, **Claude Code**, your **projects, files, git and the shell** all live there, and Cosmic Codex on the phone only shows the UI. It is the same app and the same interface, but the chats, the files and the agents' accounts live on the server (they are separate from any chats you have in local mode), so the agents keep working when the phone sleeps, and the phone stays light.
 
 It is **not a separate APK**. Both the `termux` and the `standard` variant can use it: open **Settings → Where agents run** and pick **SSH tunnel** or **Server** under *Your server*. The Linux environment on the phone is not needed in this mode. (Default ports differ per variant: `termux` uses 1234 / 1235 for the bridge / hub, `standard` uses 1236 / 1237.)
 
@@ -383,7 +383,7 @@ It is **not a separate APK**. Both the `termux` and the `standard` variant can u
 
 ```
 SSH tunnel mode (recommended)
-phone (AntiGem app)                                   your server (Linux, x86_64 or arm64)
+phone (Cosmic Codex app)                                   your server (Linux, x86_64 or arm64)
  └─ SSH  ───────────────────────────────────────────►  sshd
       · phone 127.0.0.1:1234 ──(tunnel)──► agy_ide_bridge (server 127.0.0.1:1234)
       · phone 127.0.0.1:1235 ──(tunnel)──► agy hub        (server 127.0.0.1:1235)
@@ -392,7 +392,7 @@ phone (AntiGem app)                                   your server (Linux, x86_64
       · reverse tunnels: the server's agents can use the phone's browser, Android and notes tools (and adb, if you connect it)
 
 Server mode (domain)
-phone (AntiGem app)                              your server
+phone (Cosmic Codex app)                              your server
  ├─ https://bridge.example.com  ──────────────►  nginx / Caddy / Apache ──► agy_ide_bridge (127.0.0.1)
  ├─ https://hub.example.com     ──────────────►  nginx / Caddy / Apache ──► agy hub        (127.0.0.1)
  └─ SSH                          ──────────────►  sshd (start / stop, terminal, reverse tunnels, as above)
@@ -464,43 +464,43 @@ antigem/
 
 ## Related projects
 
-AntiGem comes in parts that link to each other:
+Cosmic Codex comes in parts that link to each other:
 
 | Project | What it is | Repository |
 |---|---|---|
-| **AntiGem** (Android app) | The coding agents, a Linux terminal, an editor and a browser on your phone. With **Connect to PC** it also uses the agents of a PC that runs AntiGem for VS Code. | [Santoshkurmi/antigem](https://github.com/Santoshkurmi/antigem) |
-| **AntiGem for VS Code** | The same agents and chat in a VS Code sidebar. Its **Connect phone** lets the app on your phone use them. | [Santoshkurmi/antigem_vscode_extension](https://github.com/Santoshkurmi/antigem_vscode_extension) · install: [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=santoshkurmi.antigem-vscode-extension), [Open VSX](https://open-vsx.org/extension/santoshkurmi/antigem-vscode-extension) |
-| **AntiGem Browser Bridge** (Chrome extension) | Lets agents in AntiGem for VS Code use your real Chrome. Not needed by the Android app, which has its own browser. | [Santoshkurmi/antigem-browser-extension](https://github.com/Santoshkurmi/antigem-browser-extension) · not in the Chrome Web Store yet: installed with *Load unpacked* from AntiGem for VS Code |
-| **AntiGem Languages** | The app's translations, made by the people who use it and downloaded from **Settings → Language → Get more languages** (the app ships only English). Also the step-by-step guide to adding or improving a language, the file format and the check every translation passes. | [Santoshkurmi/antigem_languages](https://github.com/Santoshkurmi/antigem_languages) |
-| **AntiGem mini apps** | The official mini apps (Habits, Pocket Notes, Sky, Gallery, Focus, Dev Toolbox, Explorer, Showcase), installed from **Mini Apps → Get apps**. Also the guide to building and publishing your own: real app sources using every SDK feature, signed `.agapp` packages, the catalog format and the `agapp.mjs publish` tool. | [Santoshkurmi/antigem_mini_apps](https://github.com/Santoshkurmi/antigem_mini_apps) |
+| **Cosmic Codex** (Android app) | The coding agents, a Linux terminal, an editor and a browser on your phone. With **Connect to PC** it also uses the agents of a PC that runs Cosmic Codex for VS Code. | [Santoshkurmi/antigem](https://github.com/Santoshkurmi/antigem) |
+| **Cosmic Codex for VS Code** | The same agents and chat in a VS Code sidebar. Its **Connect phone** lets the app on your phone use them. | [Santoshkurmi/antigem_vscode_extension](https://github.com/Santoshkurmi/antigem_vscode_extension) · install: [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=santoshkurmi.antigem-vscode-extension), [Open VSX](https://open-vsx.org/extension/santoshkurmi/antigem-vscode-extension) |
+| **Cosmic Codex Browser Bridge** (Chrome extension) | Lets agents in Cosmic Codex for VS Code use your real Chrome. Not needed by the Android app, which has its own browser. | [Santoshkurmi/antigem-browser-extension](https://github.com/Santoshkurmi/antigem-browser-extension) · not in the Chrome Web Store yet: installed with *Load unpacked* from Cosmic Codex for VS Code |
+| **Cosmic Codex Languages** | The app's translations, made by the people who use it and downloaded from **Settings → Language → Get more languages** (the app ships only English). Also the step-by-step guide to adding or improving a language, the file format and the check every translation passes. | [Santoshkurmi/antigem_languages](https://github.com/Santoshkurmi/antigem_languages) |
+| **Cosmic Codex mini apps** | The official mini apps (Habits, Pocket Notes, Sky, Gallery, Focus, Dev Toolbox, Explorer, Showcase), installed from **Mini Apps → Get apps**. Also the guide to building and publishing your own: real app sources using every SDK feature, signed `.agapp` packages, the catalog format and the `agapp.mjs publish` tool. | [Santoshkurmi/antigem_mini_apps](https://github.com/Santoshkurmi/antigem_mini_apps) |
 This is not polished app they are only for showcase only not for use and will be removed in future.
 
 ---
 
 ## Other similar apps
 
-AntiGem not the right fit? These apps do similar things and might suit you better:
+Cosmic Codex not the right fit? These apps do similar things and might suit you better:
 
 - [**Mobile Harness**](https://github.com/techjarves/Mobile-Harness): Claude Code, DeepSeek and Antigravity agents in an Ubuntu (PRoot) workspace, with a terminal, editor and web preview.
 - [**AndroidHarness**](https://github.com/Sanuu7/AndroidHarness): a native app with its own coding agent and chat, free built-in models, offline models and Shizuku shell access.
 
 ## Contributing
 
-Issues, ideas and pull requests are welcome. **Translations** go to [AntiGem Languages](https://github.com/Santoshkurmi/antigem_languages): its README shows how to add or update a language, with or without git. For help, join the [Discord server](https://discord.gg/pJvvTDTc6G) or the [WhatsApp community](https://chat.whatsapp.com/IGQX8q9zSVV0RarG70sclV?s=cl&p=a&mlu=4&ilr=4).
+Issues, ideas and pull requests are welcome. **Translations** go to [Cosmic Codex Languages](https://github.com/Santoshkurmi/antigem_languages): its README shows how to add or update a language, with or without git. For help, join the [Discord server](https://discord.gg/pJvvTDTc6G) or the [WhatsApp community](https://chat.whatsapp.com/IGQX8q9zSVV0RarG70sclV?s=cl&p=a&mlu=4&ilr=4).
 
-**Docs and guides:** the user guide lives on the [website](https://santoshkurmi.github.io/antigem/docs/): how to install and set up AntiGem, every screen and setting, the agents, MCP, plugins, mini apps, how-to guides and troubleshooting. Its source is a separate repository, [santoshkurmi/antigem_website](https://github.com/santoshkurmi/antigem_website). The docs are new and need improvement: if you figured something out, found a page that's wrong or unclear, or want to add a guide or screenshots, please contribute there (every docs page has an **Edit this page on GitHub** link).
+**Docs and guides:** the user guide lives on the [website](https://santoshkurmi.github.io/antigem/docs/): how to install and set up Cosmic Codex, every screen and setting, the agents, MCP, plugins, mini apps, how-to guides and troubleshooting. Its source is a separate repository, [santoshkurmi/antigem_website](https://github.com/santoshkurmi/antigem_website). The docs are new and need improvement: if you figured something out, found a page that's wrong or unclear, or want to add a guide or screenshots, please contribute there (every docs page has an **Edit this page on GitHub** link).
 
 ## Analytics
 
-AntiGem uses [TelemetryDeck](https://telemetrydeck.com) only to count how many people use the app. It records app opens, an anonymous install ID, session counts, and general device details (phone model, Android version, app version). It does **not** collect chats, prompts, code, files, terminal output, account emails or API keys. Debug builds are marked as test data.
+Cosmic Codex uses [TelemetryDeck](https://telemetrydeck.com) only to count how many people use the app. It records app opens, an anonymous install ID, session counts, and general device details (phone model, Android version, app version). It does **not** collect chats, prompts, code, files, terminal output, account emails or API keys. Debug builds are marked as test data.
 
 ## Disclaimer
 
-AntiGem is an independent project. It is not affiliated with, endorsed by or sponsored by Google, Anthropic, OpenAI, OpenCode or any other AI provider. Antigravity, Claude, Claude Code, Codex and other product names are trademarks of their owners and are used here only to say which tools the app works with.
+Cosmic Codex is an independent project. It is not affiliated with, endorsed by or sponsored by Google, Anthropic, OpenAI, OpenCode or any other AI provider. Antigravity, Claude, Claude Code, Codex and other product names are trademarks of their owners and are used here only to say which tools the app works with.
 
-AntiGem does not include these tools. You install each one from its official source and sign in with that tool's own login, and the app gives you an interface on top of it. Your use of each tool and account is covered by that provider's own terms, the same as when you use the tool from a terminal.
+Cosmic Codex does not include these tools. You install each one from its official source and sign in with that tool's own login, and the app gives you an interface on top of it. Your use of each tool and account is covered by that provider's own terms, the same as when you use the tool from a terminal.
 
-AntiGem is free software, provided as is, without warranty, as described in the [license](LICENSE).
+Cosmic Codex is free software, provided as is, without warranty, as described in the [license](LICENSE).
 
 ## License
 

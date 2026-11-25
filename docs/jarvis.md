@@ -1,11 +1,11 @@
-# Jarvis: the voice assistant of AntiGem
+# Jarvis: the voice assistant of Cosmic Codex
 
-Jarvis lets you use AntiGem by voice, hands-free. Talk to it while you cook, walk or drive, and it opens your projects and
+Jarvis lets you use Cosmic Codex by voice, hands-free. Talk to it while you cook, walk or drive, and it opens your projects and
 files, answers questions, starts and watches long jobs for you, reads approvals out loud, changes settings and themes, and
 tells you how the app works.
 
 Jarvis is not a separate AI. It runs on the agent you already use, **Claude Code** or **Antigravity**, in a hidden chat
-of its own, and controls the app through a built-in MCP server called `jarvis_mcp`. It controls **AntiGem only**, not the
+of its own, and controls the app through a built-in MCP server called `jarvis_mcp`. It controls **Cosmic Codex only**, not the
 rest of your phone (that is what the separate Android MCP is for).
 
 Jarvis is **off by default**. Nothing listens until you turn it on.
@@ -55,7 +55,7 @@ To use Jarvis with the screen off, turn on **Hands-free mode** (section 2).
 | Trigger | How | Notes |
 | :--- | :--- | :--- |
 | **The orb** | Tap the orb on the edge of the screen. | Long-press it to open the Jarvis panel. |
-| **Quick Settings tile** | Pull down the notification shade, edit the tiles, add **Jarvis**. Tap it to talk. | Works from any app. With hands-free on, it starts listening right away; otherwise it opens AntiGem and listens. |
+| **Quick Settings tile** | Pull down the notification shade, edit the tiles, add **Jarvis**. Tap it to talk. | Works from any app. With hands-free on, it starts listening right away; otherwise it opens Cosmic Codex and listens. |
 | **Notification** | With hands-free on, the Jarvis notification has **Talk / Send / Stop**. | |
 | **Headset or Bluetooth button** | One press talks (or sends while listening); two presses stop. | Needs hands-free mode. Works while no music app has taken the media button. |
 | **Wake phrase** | Say "Hey Jarvis" (or your own phrases). | Needs hands-free mode and **Trigger: Wake phrase too**. |

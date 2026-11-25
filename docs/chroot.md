@@ -1,11 +1,11 @@
 # Ubuntu chroot: a real Ubuntu for the agents (rooted phones)
 
-On a rooted phone, AntiGem can run its bridge, the agents (Antigravity, Claude Code, OpenCode, Codex) and the terminal
+On a rooted phone, Cosmic Codex can run its bridge, the agents (Antigravity, Claude Code, OpenCode, Codex) and the terminal
 inside a **real Ubuntu** instead of its built-in Linux environment. Ubuntu is unpacked into a folder on `/data` and entered
 with `chroot` through your root manager (Magisk, KernelSU or APatch). Programs run natively at full speed, with Ubuntu's
 own `apt`, `glibc` and `sudo`.
 
-It is optional. AntiGem's built-in environment needs no root and is the right choice for most people. This guide explains
+It is optional. Cosmic Codex's built-in environment needs no root and is the right choice for most people. This guide explains
 what the Ubuntu chroot is, when it is worth it, every setting with the recommended choice, and the risks.
 
 > **In one line:** use the Ubuntu chroot when you need real Ubuntu packages or Linux programs that do not run in the
@@ -19,11 +19,11 @@ what the Ubuntu chroot is, when it is worth it, every setting with the recommend
 2. [Should you use it?](#2-should-you-use-it)
 3. [What you need](#3-what-you-need)
 4. [Installing it: the setup page, step by step](#4-installing-it-the-setup-page-step-by-step)
-5. [Switching between AntiGem, the Ubuntu chroot and a server](#5-switching-between-antigem-the-ubuntu-chroot-and-a-server)
+5. [Switching between Cosmic Codex, the Ubuntu chroot and a server](#5-switching-between-antigem-the-ubuntu-chroot-and-a-server)
 6. [The Ubuntu chroot page](#6-the-ubuntu-chroot-page)
 7. [Shared folders, phone storage and USB devices](#7-shared-folders-phone-storage-and-usb-devices)
 8. [Agents inside the chroot](#8-agents-inside-the-chroot)
-9. [Closing AntiGem: does the chroot keep running?](#9-closing-antigem-does-the-chroot-keep-running)
+9. [Closing Cosmic Codex: does the chroot keep running?](#9-closing-antigem-does-the-chroot-keep-running)
 10. [Backup, restore and the clean image](#10-backup-restore-and-the-clean-image)
 11. [Risks and safety](#11-risks-and-safety)
 12. [How it works inside](#12-how-it-works-inside)
@@ -40,8 +40,8 @@ what the Ubuntu chroot is, when it is worth it, every setting with the recommend
   phone's `/data` partition, for example `/data/local/antigem/ubuntu-24.04`.
 - Entered with `chroot`: programs started inside see that folder as `/`. They use Ubuntu's libraries and tools, but
   Android's Linux kernel. Nothing is emulated, so they run at full speed.
-- Where AntiGem's IDE bridge, the agents and the terminal run while it is chosen in **Settings → Where agents run**.
-- Managed by AntiGem: installing, starting, stopping, mounting, packages, backups and deleting are all done from the app.
+- Where Cosmic Codex's IDE bridge, the agents and the terminal run while it is chosen in **Settings → Where agents run**.
+- Managed by Cosmic Codex: installing, starting, stopping, mounting, packages, backups and deleting are all done from the app.
 
 **It is not:**
 
@@ -56,7 +56,7 @@ what the Ubuntu chroot is, when it is worth it, every setting with the recommend
 
 ## 2. Should you use it?
 
-| | AntiGem (built in) | Ubuntu chroot | Your server |
+| | Cosmic Codex (built in) | Ubuntu chroot | Your server |
 |---|---|---|---|
 | Root needed | No | **Yes** (Magisk, KernelSU, APatch) | No |
 | Packages | `pkg install` (Termux packages, built for Android) | `apt install` (all of Ubuntu) | Whatever the server has |
@@ -67,7 +67,7 @@ what the Ubuntu chroot is, when it is worth it, every setting with the recommend
 | Isolation from the phone | The app's own sandbox | **None for root** | Separate machine |
 | Setup | One download | One page, a few minutes | A server and SSH |
 
-**Recommended:** stay on **AntiGem** if it does what you need. Choose the **Ubuntu chroot** when you hit its limits:
+**Recommended:** stay on **Cosmic Codex** if it does what you need. Choose the **Ubuntu chroot** when you hit its limits:
 
 - you need a package only Ubuntu has, or a prebuilt Linux tool (a database, a compiler, a language runtime release)
   that does not run in the built-in environment;
@@ -83,10 +83,10 @@ Both phone environments can be installed at the same time. One of them is in use
 
 ## 3. What you need
 
-- **A rooted phone** with Magisk, KernelSU or APatch that grants AntiGem root. The first time, your root manager asks
+- **A rooted phone** with Magisk, KernelSU or APatch that grants Cosmic Codex root. The first time, your root manager asks
   you to allow AntiGem.
 - **Free space on `/data`:** at least 1 GB to install. 2–3 GB is comfortable once packages and agents are in.
-- **An arm64 phone** (or the x86_64 build of AntiGem on an x86_64 device). The CPU of the rootfs must match.
+- **An arm64 phone** (or the x86_64 build of Cosmic Codex on an x86_64 device). The CPU of the rootfs must match.
 - **For the recommended private mount namespace:** the `unshare` and `nsenter` tools. Magisk, KernelSU and APatch ship
   them in their busybox, and recent Android has them in toybox, so this is almost always there. The setup page checks it
   for you.
@@ -105,12 +105,12 @@ free space on `/data`. Nothing is installed by this check. **Accept the root man
 
 ### 4.2 Found on this phone
 
-AntiGem looks for Ubuntu folders that are already there (its registry, the folders in `/data/local/antigem`, and
+Cosmic Codex looks for Ubuntu folders that are already there (its registry, the folders in `/data/local/antigem`, and
 `/data/local/ubuntu` from the first chroot version).
 
-- **Use this:** an install AntiGem made before (for example after reinstalling the app). It is used again as it is.
-- **Adopt…:** a rootfs without AntiGem's manifest (the first chroot version, or one made by another tool). AntiGem
-  stops it, writes its manifest and settings, and **moves its user to AntiGem's own uid** (files in that user's home move
+- **Use this:** an install Cosmic Codex made before (for example after reinstalling the app). It is used again as it is.
+- **Adopt…:** a rootfs without Cosmic Codex's manifest (the first chroot version, or one made by another tool). Cosmic Codex
+  stops it, writes its manifest and settings, and **moves its user to Cosmic Codex's own uid** (files in that user's home move
   with it). After that it is managed like any other install.
 
 Each one shows its state: **running** (processes inside), **mounted, nothing running** (mounts left behind by an older
@@ -120,12 +120,12 @@ launcher) or **stopped**.
 
 | Choice | What it is | When to pick it |
 |---|---|---|
-| **AntiGem Ubuntu (prebuilt)** | Ubuntu 24.04 with sudo, git, curl, Node.js, Python and the Android fixes already set up, from AntiGem's GitHub release | **Recommended** once it is published (the option says *not published yet* until then). Quickest start. |
-| **Ubuntu 24.04 LTS (Noble)** | Official *Ubuntu Base* from `cdimage.ubuntu.com`, about 30 MB. AntiGem picks the newest point release (24.04.5 …) and checks it against Ubuntu's `SHA256SUMS` | **Recommended** otherwise: long support, what most tools are tested on. |
+| **Cosmic Codex Ubuntu (prebuilt)** | Ubuntu 24.04 with sudo, git, curl, Node.js, Python and the Android fixes already set up, from Cosmic Codex's GitHub release | **Recommended** once it is published (the option says *not published yet* until then). Quickest start. |
+| **Ubuntu 24.04 LTS (Noble)** | Official *Ubuntu Base* from `cdimage.ubuntu.com`, about 30 MB. Cosmic Codex picks the newest point release (24.04.5 …) and checks it against Ubuntu's `SHA256SUMS` | **Recommended** otherwise: long support, what most tools are tested on. |
 | Ubuntu 26.04 LTS | The newest LTS | When you want newer packages. |
 | Ubuntu 22.04 LTS (Jammy) | The older LTS | Only for tools that need it. |
 | Another URL | Any rootfs `.tar.gz` / `.tar.xz` (Debian, Kali, Arch ARM …), with an optional sha256 | Advanced. Non-Ubuntu systems may need manual fixes. |
-| A file on this phone | An AntiGem backup, or any rootfs archive you downloaded | Restoring a backup ([section 10](#10-backup-restore-and-the-clean-image)). |
+| A file on this phone | An Cosmic Codex backup, or any rootfs archive you downloaded | Restoring a backup ([section 10](#10-backup-restore-and-the-clean-image)). |
 
 ### 4.4 Location: where the folder goes
 
@@ -134,8 +134,8 @@ hold it (no Linux permissions, no `exec`).
 
 | Choice | What happens | Recommendation |
 |---|---|---|
-| **`/data/local/antigem/<name>`** | Stays when AntiGem is uninstalled or its data is cleared, and is found again after a reinstall (*Found on this phone → Use this*) | **Recommended.** Your Ubuntu survives app reinstalls. |
-| AntiGem's app storage | Inside the app's own data: removed together with the app (uninstall or *Clear data*). Only the private namespace is allowed here. | When you want no trace left after uninstalling. |
+| **`/data/local/antigem/<name>`** | Stays when Cosmic Codex is uninstalled or its data is cleared, and is found again after a reinstall (*Found on this phone → Use this*) | **Recommended.** Your Ubuntu survives app reinstalls. |
+| Cosmic Codex's app storage | Inside the app's own data: removed together with the app (uninstall or *Clear data*). Only the private namespace is allowed here. | When you want no trace left after uninstalling. |
 | Another folder on `/data` | Any folder you type, checked against Android's and the root manager's own folders | Advanced. |
 
 The *Name* (for example `ubuntu-24.04`) is only the folder name and the label in the app.
@@ -145,11 +145,11 @@ The *Name* (for example `ubuntu-24.04`) is only the folder name and the label in
 The normal user the bridge, the agents and your terminal run as.
 
 - **User name:** lowercase letters, digits, `_` and `-` (default `ubuntu`).
-- **It gets AntiGem's own uid** (for example 10789), not Ubuntu's usual 1000. Why:
+- **It gets Cosmic Codex's own uid** (for example 10789), not Ubuntu's usual 1000. Why:
   - on Android, uid 1000 is the **system** user, with extra rights. A chroot user should not be that.
-  - with AntiGem's uid, files in folders shared with the app (see [section 7](#7-shared-folders-phone-storage-and-usb-devices))
+  - with Cosmic Codex's uid, files in folders shared with the app (see [section 7](#7-shared-folders-phone-storage-and-usb-devices))
     belong to both sides, so both can read and write them.
-  - if AntiGem is reinstalled and gets a new uid, the user follows it automatically at the next start.
+  - if Cosmic Codex is reinstalled and gets a new uid, the user follows it automatically at the next start.
 - **Password:** optional. Without one, the user can only become root through *sudo without a password*.
 - **sudo without a password:** on by default, **recommended for agents**, so they can `apt install` what they need without
   asking. **Risk:** an agent that runs `sudo` gets root of your phone ([section 11](#11-risks-and-safety)). Turn it off
@@ -209,29 +209,29 @@ folder).
 
 ---
 
-## 5. Switching between AntiGem, the Ubuntu chroot and a server
+## 5. Switching between Cosmic Codex, the Ubuntu chroot and a server
 
 **Settings → Where agents run → Agents run on:**
 
-- **This phone:** **AntiGem** or **Ubuntu chroot**
+- **This phone:** **Cosmic Codex** or **Ubuntu chroot**
 - **Your server:** **Server** or **SSH tunnel** ([docs/remote-server.md](remote-server.md))
 
-Pick one and tap **Save**. AntiGem asks to reopen, and comes back on the chosen runtime. Under the choice you only see
-what belongs to it: AntiGem's install and its paths, the chroot's installs and its paths, or the server's settings.
+Pick one and tap **Save**. Cosmic Codex asks to reopen, and comes back on the chosen runtime. Under the choice you only see
+what belongs to it: Cosmic Codex's install and its paths, the chroot's installs and its paths, or the server's settings.
 
 Good to know:
 
 - **Each runtime has its own home**: its own agent logins, chats, settings and projects. Switching does not move them.
   Share a folder ([section 7](#7-shared-folders-phone-storage-and-usb-devices)) if you want the same projects in both.
-- **Ports:** the chroot's bridge and hub listen on AntiGem's own ports **+ 100** (for example 1336 / 1337 when
-  AntiGem uses 1236 / 1237). A chroot bridge that is still running can then never block AntiGem's own bridge after a
+- **Ports:** the chroot's bridge and hub listen on Cosmic Codex's own ports **+ 100** (for example 1336 / 1337 when
+  Cosmic Codex uses 1236 / 1237). A chroot bridge that is still running can then never block Cosmic Codex's own bridge after a
   switch. The addresses change with the choice by themselves; addresses you typed by hand are kept.
-- **Leaving the chroot** (to AntiGem or a server) stops the chroot's bridge, so it does not keep running in the
+- **Leaving the chroot** (to Cosmic Codex or a server) stops the chroot's bridge, so it does not keep running in the
   background. Its mounts stay until you stop it on its page.
-- **Installing AntiGem's environment while the chroot is in use** switches to it when the install finishes: the chroot's
+- **Installing Cosmic Codex's environment while the chroot is in use** switches to it when the install finishes: the chroot's
   bridge stops, terminals close and the bridge starts in AntiGem.
 - **Agent paths:** each runtime has its own paths for the bridge, agy, Claude Code, OpenCode and Codex
-  (*Agent paths in AntiGem*, *Agent paths in the Ubuntu chroot*, the server's). **Leave them empty**: the defaults are
+  (*Agent paths in Cosmic Codex*, *Agent paths in the Ubuntu chroot*, the server's). **Leave them empty**: the defaults are
   shown in grey and work. Only change them if you put an agent somewhere else on purpose.
 
 ---
@@ -254,7 +254,7 @@ Good to know:
     Otherwise only mounts it.
   - For the install in use: **Restart bridge**, **Terminal** (a shell as your user), **Root shell** (`sudo -i`).
   - **Refresh.**
-  - **Delete this Ubuntu…** and **Forget (keep files)** (removes it from AntiGem's list only).
+  - **Delete this Ubuntu…** and **Forget (keep files)** (removes it from Cosmic Codex's list only).
 
 **Delete** first lists everything still mounted inside the folder, in **every** mount namespace of the phone (for
 example `/system (Android's namespace)` left by an older launcher). These are unmounted first, and what they show is
@@ -289,7 +289,7 @@ window.
 
 Set the password, and choose whether `sudo` asks for it.
 
-### When AntiGem exits
+### When Cosmic Codex exits
 
 See [section 9](#9-closing-antigem-does-the-chroot-keep-running).
 
@@ -299,8 +299,8 @@ Every process running in it, with **Kill**.
 
 ### Repair
 
-Sets up Android's network groups, the user (and moves it to AntiGem's uid), DNS and this app's bridge again. Use it
-after restoring an old backup, after updating AntiGem, or when something inside stopped working.
+Sets up Android's network groups, the user (and moves it to Cosmic Codex's uid), DNS and this app's bridge again. Use it
+after restoring an old backup, after updating Cosmic Codex, or when something inside stopped working.
 
 ### About this phone
 
@@ -316,7 +316,7 @@ The root manager, the mount tools, SELinux, the kernel, where the install came f
 On the setup page (Options) and on the chroot's page (Settings), **Add a folder**:
 
 1. **The folder on the phone:**
-   - **AntiGem home:** the home of AntiGem's built-in environment, shown at `~/antigem_home`, so both runtimes see the
+   - **Cosmic Codex home:** the home of Cosmic Codex's built-in environment, shown at `~/antigem_home`, so both runtimes see the
      same projects.
    - **Download, Documents, DCIM, Pictures.**
    - **Browse…** picks any folder on the phone's storage or an SD card.
@@ -373,13 +373,13 @@ agent's official Linux installer:
 The paths can be changed in **Where agents run → Agent paths in the Ubuntu chroot**. Leave them empty unless you moved
 an agent on purpose.
 
-Agent logins (`~/.claude`, `~/.codex`, …) live in the chroot user's home, separate from AntiGem's built-in environment.
+Agent logins (`~/.claude`, `~/.codex`, …) live in the chroot user's home, separate from Cosmic Codex's built-in environment.
 MCP servers get a normal Linux environment.
 
 **What agents are told** (the built-in part of **Settings → Agents → Global context**, which follows
 **Where agents run**): that they run in a rooted Ubuntu chroot on an Android phone (apt, `/tmp` and `/usr` work, no
 systemd), which user they are, that `sudo` is root of the **whole phone**, and to **never use `sudo` or `su` on their
-own**: only when you ask, and to ask you before `sudo apt install`. AntiGem's built-in environment, a server and a PC
+own**: only when you ask, and to ask you before `sudo apt install`. Cosmic Codex's built-in environment, a server and a PC
 (Connect to PC) each get their own text, with the same rule about root.
 
 > Codex runs its commands in a `bwrap` sandbox. Some Android kernels lack what bwrap needs (user namespaces). If Codex
@@ -387,24 +387,24 @@ own**: only when you ask, and to ask you before `sudo apt install`. AntiGem's bu
 
 ---
 
-## 9. Closing AntiGem: does the chroot keep running?
+## 9. Closing Cosmic Codex: does the chroot keep running?
 
-The chroot's bridge and agents run as their own processes, outside the AntiGem app. **Android does not kill them** when
-you leave AntiGem, swipe it away from recents, or when Android closes the app in the background. So an agent can finish
-its work while AntiGem is closed, and AntiGem reconnects when you open it again. A bridge started with the same settings
+The chroot's bridge and agents run as their own processes, outside the Cosmic Codex app. **Android does not kill them** when
+you leave Cosmic Codex, swipe it away from recents, or when Android closes the app in the background. So an agent can finish
+its work while Cosmic Codex is closed, and Cosmic Codex reconnects when you open it again. A bridge started with the same settings
 is reused, so the agents are not interrupted.
 
 They stop only when:
 
 - you stop them (**Stop** on the chroot's page, or Exit with a "stop" choice, below);
-- the phone restarts (nothing starts at boot; the next time AntiGem opens, it starts the chroot again);
+- the phone restarts (nothing starts at boot; the next time Cosmic Codex opens, it starts the chroot again);
 - the phone runs completely out of memory (rare, and then anything can be closed).
 
-Terminal tabs are the exception: if AntiGem closes, open terminal shells close with it. The agent chats keep running.
+Terminal tabs are the exception: if Cosmic Codex closes, open terminal shells close with it. The agent chats keep running.
 
-**When AntiGem exits** (chroot page) decides what Exit from the side menu or the notification does:
+**When Cosmic Codex exits** (chroot page) decides what Exit from the side menu or the notification does:
 
-- **Keep running** (default): the bridge and the agents keep working while AntiGem is closed.
+- **Keep running** (default): the bridge and the agents keep working while Cosmic Codex is closed.
 - **Stop the bridge and agents:** the chroot's mounts stay, so the next start is quick.
 - **Stop everything:** every process of the chroot is stopped and its folders are unmounted.
 
@@ -424,7 +424,7 @@ On the chroot's page, **Backup & restore**.
 
 The backup is one file with everything of this Ubuntu: system, packages, your home, agent logins, chats and the
 chroot's settings, with owners and permissions kept. **It never contains** `/proc`, `/sys`, `/dev`, `/sdcard`,
-`/storage`, `/tmp`, the contents of shared folders, AntiGem's run files or downloaded `.deb` packages.
+`/storage`, `/tmp`, the contents of shared folders, Cosmic Codex's run files or downloaded `.deb` packages.
 
 It works while the chroot runs, so agents are not interrupted. The log shows the progress, the file size and its sha256.
 If the chroot's mounts are in Android's namespace (the global namespace, or leftovers of an older launcher), it asks you
@@ -437,13 +437,13 @@ to Stop it first. A failed backup's file is removed.
 **Restore a backup…** opens the setup page in restore mode: pick the file, a name and a folder.
 
 - It is installed as **a new copy**. Nothing is overwritten, and your current install stays until you delete it.
-- An AntiGem backup **keeps its user, home, settings and packages**. Its user moves to this app's uid, so it also works
+- An Cosmic Codex backup **keeps its user, home, settings and packages**. Its user moves to this app's uid, so it also works
   on another phone or after reinstalling AntiGem.
 - The restored copy appears in your list. Choose it in **Where agents run** to use it.
 
 ### Export a clean image (to share)
 
-For publishing a ready-made Ubuntu, for example AntiGem's own prebuilt image.
+For publishing a ready-made Ubuntu, for example Cosmic Codex's own prebuilt image.
 
 **Export a clean image…** asks for a folder and writes two files there:
 
@@ -451,15 +451,15 @@ For publishing a ready-made Ubuntu, for example AntiGem's own prebuilt image.
 - the same name with `.sha256` added
 
 The clean image **leaves out** the home folders, root's logins and history (`.claude`, `.codex`, `.gemini`, `.ssh`,
-caches …), AntiGem's own files, logs, the apt lists and cache, AntiGem's sudo rule and SSH host keys. Installing it
+caches …), Cosmic Codex's own files, logs, the apt lists and cache, Cosmic Codex's sudo rule and SSH host keys. Installing it
 creates the user again (with Ubuntu's usual home files) and runs `apt update` before installing packages.
 
-**To publish it as AntiGem's prebuilt Ubuntu:** upload both files to the GitHub release **`chroot-ubuntu-v1`** of
-`Santoshkurmi/antigem`. The setup page's **AntiGem Ubuntu (prebuilt)** source then turns on by itself and checks the
+**To publish it as Cosmic Codex's prebuilt Ubuntu:** upload both files to the GitHub release **`chroot-ubuntu-v1`** of
+`Santoshkurmi/antigem`. The setup page's **Cosmic Codex Ubuntu (prebuilt)** source then turns on by itself and checks the
 download against the `.sha256`. Make the image from a fresh install with the packages you want in it, not from your
 daily one.
 
-AntiGem's built-in environment keeps its own backups in **Settings → Backups**.
+Cosmic Codex's built-in environment keeps its own backups in **Settings → Backups**.
 
 ---
 
@@ -473,7 +473,7 @@ other apps' data, the root manager.
   use `sudo` or `su` on their own and to ask you first (see [section 8](#8-agents-inside-the-chroot)), but that is an
   instruction, not a lock. To make it a lock, turn it off on the chroot's page (**User → sudo: ask password**, after
   setting a password). Then every `sudo` needs you.
-- **The normal user** has AntiGem's own uid and no more rights than the app itself.
+- **The normal user** has Cosmic Codex's own uid and no more rights than the app itself.
 
 **Your files:**
 
@@ -489,9 +489,9 @@ other apps' data, the root manager.
   mount points are empty folders, and `/sdcard` is a link that points into the rootfs itself.
 - With the **global** namespace, the mounts are visible to the whole phone. A root file manager or `rm -rf` on the
   rootfs folder **while the chroot is mounted would delete the contents of `/sdcard`, USB drives and shared folders.**
-  Stop it first, or use AntiGem's Delete.
-- A rootfs in **AntiGem's app storage** is deleted by Android with the app (uninstall, *Clear data*). That is why only
-  the private namespace is allowed there, and why AntiGem stops the chroot before it clears its own data.
+  Stop it first, or use Cosmic Codex's Delete.
+- A rootfs in **Cosmic Codex's app storage** is deleted by Android with the app (uninstall, *Clear data*). That is why only
+  the private namespace is allowed there, and why Cosmic Codex stops the chroot before it clears its own data.
 
 **Other things to know:**
 
@@ -499,8 +499,8 @@ other apps' data, the root manager.
   not protect the phone from them.
 - **USB:** with an OTG cable, programs in the chroot can talk to connected USB devices directly (that is what
   fastboot needs). A wrong `fastboot flash` can break the device it targets.
-- **Root manager notifications:** Magisk shows a "granted superuser" toast each time AntiGem uses root (every terminal,
-  every status refresh). You can turn it off for AntiGem in Magisk's superuser list.
+- **Root manager notifications:** Magisk shows a "granted superuser" toast each time Cosmic Codex uses root (every terminal,
+  every status refresh). You can turn it off for Cosmic Codex in Magisk's superuser list.
 - **Updates:** Ubuntu's packages are updated with **Update & upgrade all** (or `sudo apt upgrade`), not by AntiGem. The
   bridge inside is replaced with this app's version at every start.
 
@@ -550,10 +550,10 @@ Android's main namespace instead.
 ### Long-running processes
 
 - **The holder and the bridge** are started detached (`setsid`) and moved out of the app's process group, so Android
-  does not stop them with the app. The bridge writes its output to `<rootfs>/.antigem/run/bridge.log`, and AntiGem's
+  does not stop them with the app. The bridge writes its output to `<rootfs>/.antigem/run/bridge.log`, and Cosmic Codex's
   *Server Runner* terminal shows that log.
 - **Terminal tabs** get the tab as their controlling terminal (job control, Ctrl+C and Ctrl+Z work, and so does `sudo su`).
-- The bridge is this app's own **Linux** build (the one used by AntiGem's built-in environment needs Android's linker).
+- The bridge is this app's own **Linux** build (the one used by Cosmic Codex's built-in environment needs Android's linker).
   It is copied in at every start when the app has a newer one.
 
 ### Files
@@ -563,7 +563,7 @@ Android's main namespace instead.
 | `<rootfs>/.antigem/manifest` | Name, Ubuntu version, CPU, user, uid, source, creation date |
 | `<rootfs>/.antigem/chroot.conf` | The chroot's settings (mounts, DNS, namespace, shared folders) |
 | `<rootfs>/.antigem/run/` | holder and bridge pids, the bridge's log |
-| `/data/local/antigem/registry` | The rootfs folders AntiGem installed (to find them after a reinstall) |
+| `/data/local/antigem/registry` | The rootfs folders Cosmic Codex installed (to find them after a reinstall) |
 
 ### Android specifics it handles
 
@@ -577,7 +577,7 @@ Android's main namespace instead.
 
 ## 13. What does not work in the chroot (yet)
 
-These pages use the tools of AntiGem's built-in environment, so they show a notice while the Ubuntu chroot is in use:
+These pages use the tools of Cosmic Codex's built-in environment, so they show a notice while the Ubuntu chroot is in use:
 
 - **REA** (reverse engineering) and **Android development**
 - **Termux:API** and the **X11 desktop**
@@ -587,7 +587,7 @@ These pages use the tools of AntiGem's built-in environment, so they show a noti
 Also:
 
 - `termux-*` commands do not exist inside Ubuntu.
-- Mini-apps and the EGM design reviews keep their folders in AntiGem's built-in home. Share **AntiGem home** into the
+- Mini-apps and the EGM design reviews keep their folders in Cosmic Codex's built-in home. Share **Cosmic Codex home** into the
   chroot ([section 7](#7-shared-folders-phone-storage-and-usb-devices)) if agents should work on them.
 
 ---
@@ -596,7 +596,7 @@ Also:
 
 | What you see | What to do |
 |---|---|
-| **No root access** | Allow AntiGem in your root manager (Magisk → Superuser, KernelSU / APatch → app list), then **Check again**. |
+| **No root access** | Allow Cosmic Codex in your root manager (Magisk → Superuser, KernelSU / APatch → app list), then **Check again**. |
 | **The private mount namespace needs unshare and nsenter** | Your root manager has no busybox with them. Choose **Global** under Options (and mind its risk). |
 | **Could not make the mount namespace a slave** | Same as above: use **Global**. |
 | An install shows **Mounted, nothing running** | Mounts left by an older launcher. **Stop** unmounts them. |
@@ -607,8 +607,8 @@ Also:
 | A USB drive is not in `/storage` | Turn on **USB drives and SD cards** (not possible with read-only `/sdcard`), save, Stop, Start. |
 | `fastboot` / `adb` cannot open the device | Run **Repair** once (it adds the user to Android's usb group), unplug and plug in again. |
 | Codex commands fail, but Codex runs | Its bwrap sandbox may need kernel features the phone lacks: turn the sandbox off in Codex's settings. |
-| Magisk shows a toast all the time | Turn notifications off for AntiGem in Magisk's superuser list. |
-| After reinstalling AntiGem the Ubuntu is gone from the list | Setup page → **Found on this phone → Use this** (the folder in `/data/local/antigem` is still there). |
+| Magisk shows a toast all the time | Turn notifications off for Cosmic Codex in Magisk's superuser list. |
+| After reinstalling Cosmic Codex the Ubuntu is gone from the list | Setup page → **Found on this phone → Use this** (the folder in `/data/local/antigem` is still there). |
 | Something inside stopped working after an update | **Repair** on the chroot's page. |
 
 Still stuck? Open an issue with the log from the setup page or the task window, and the **About this phone** details.
